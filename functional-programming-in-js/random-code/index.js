@@ -346,6 +346,12 @@ console.log(eveningGreetingFunction('Tim'));
 
 const greet3 = R.curry((greeting, name) => `${greeting} ${name}`);
 
+//this way
+console.log(greet3('Good morning')('Aemal'));
+
+//or this way (the Ramda way)
+console.log(greet3('Good morning', 'Aemal'));
+
 const morningGreetingFunction2 = greet3('Good morning');
 const eveningGreetingFunction2 = greet3('Good evening');
 
@@ -359,3 +365,244 @@ const friends3 = ['Khan', 'Noor', 'Tim'];
 const friendsGreetings = friends3.map(greet3('Good morning'));
 
 console.log(friendsGreetings);
+
+//-----------------------------------------------
+//Pure functions
+/*
+
+It is a function that creates and returns value based on the input parameters and causing no side effects (i.e. does not mutate the params)
+
+Pure Function Rules:
+1. Must have input parameters
+2. Must not use any stateful values (i.e. should not depend on the values outside the function or params that could change over time)
+3. Must return a value based on the input parameters
+4. Must not cause any side effects (i.e. the code should not cause change outside of itself)
+
+*/
+
+function add(x, y) {
+    return x + y;
+}
+
+const add2 = (x, y) => x + y;
+
+/*
+
+Why use pure functions?
+1. Reusable
+2. Composable
+3. Easy to test
+4. Easy to cache
+5. more...
+
+*/
+
+// Function composition
+// It is about making new functions out of other functions
+
+const sentence = 'The only failure is giving up!';
+
+const wordList = R.split(' ', sentence);
+
+console.log(wordList);
+
+const wordCount = R.length(R.split(' ', sentence));
+
+console.log(wordCount);
+
+const countWords = R.compose(R.length, R.split); //composing two functions into one from right to left
+
+console.log(countWords(' ', sentence));
+
+const countWords2 = R.compose(R.length, R.split(' ')); //as all Ramda functions are curried, we can use the magic of currying
+
+console.log(countWords2(sentence));
+
+
+//pipe function
+//it is almost exactly like compose but it is read from left to right
+
+const countWords3 = R.pipe(R.split(' '), R.length);
+console.log(countWords3(sentence));
+
+//Excercise: https://jsbin.com/gopaned/1/edit?js,console
+
+// NOTE: If you get stuck, you can get some hints from 
+// the following jsbin: 
+// https://jsbin.com/gikuwol/edit?js,console
+
+//Solution: https://jsbin.com/qeraloxode/6/edit?js,console
+
+// Count how many numbers there are in the following 
+// sentence, using functional composition
+
+const sentence2 = 'PechaKucha is a presentation style in which 20 slides are shown for 20 seconds each (6 minutes and 40 seconds in total).';
+
+/*
+//The ugly way
+const test = numbersInString(sentence);
+
+const test2 = test.map(function(a) {
+  return parseInt(a);
+})
+
+const test3 = test2.filter(function(a) {
+  return Number.isInteger(a)
+})
+
+
+console.log(test3.length)
+*/
+
+//the beautiful way
+
+const numbersInString = R.pipe(
+  R.split(''), 
+  R.map(parseInt), 
+  R.filter(Number.isInteger), 
+  R.length
+);
+
+console.log(numbersInString(sentence2));
+
+expect(numbersInString(sentence2)).toBe(7); 
+
+console.log('If you see this printed in the console, the test passed!');
+
+//Check out Tachyons CSS library: http://jsbin.com/razofij/edit?html,output
+
+/*
+Note: As a functional programmer you are interested in 
+1) Data (immutable data)
+2) Functions (pure functions)
+
+One thing that seperates object oriented programmers from functional programmers is that functional programmers don't combine data with functions.
+
+We will use hyperscript and hyperscript-helpers libraries to transfoer our data into HTML.
+
+*/
+
+//Examples of hyperscript-helpers:
+
+const myHeading = tags.h1('Hello World!');
+
+console.log(myHeading);
+
+//we can simplify it in a few ways:
+//const h1 = tags.h1;
+//const mySecondHeading = h1("Hello World!");
+
+//or the preferred way would be to use destructuring:
+const { h1 } = tags;
+const myThirdHeading = h1("Hello World!");
+
+//now you can add the HTML elements on the app div as following:
+const objNode = document.getElementById('app');
+
+objNode.appendChild(myHeading);
+
+//an example of table using Tachyons: https://jsbin.com/ruyixox/edit?html,output
+
+
+//--------------------------------
+// Transforming data into HTML & CSS
+/* 
+
+Follow the single responsibility principle
+For example, we need the following functions to produce a table from this link: https://jsbin.com/ruyixox/edit?html,output
+
+[ ] Cell
+[ ] mealRow
+[ ] headerRow
+[ ] totalRow
+[ ] mealBody
+[ ] mealHeader
+[ ] mealsTable
+
+*/
+
+const MEALS = [
+    { description: 'Breakfast', calories: 460 },
+    { description: 'Snack', calories: 180 },
+    { description: 'Lunch', calories: 600 },
+];
+
+const { td, th, tr, tbody, thead, table } = tags;
+
+function cell(tag, className, value) {
+    return tag({ className }, value);
+}
+
+function mealRow(className, meal) {
+    return tr({ className }, [
+        cell(td, 'pa2', meal.description),
+        cell(td, 'pa2 tr', meal.calories),
+    ]);
+}
+
+function mealsBody(className, meals) {
+    const rows = R.map(R.partial(mealRow, ['stripe-dark']), meals); // R.partial function is used to use curry on uncurried functions. If the mealRow function was curried, we could use partial applications but using R.partial we can use noncurried functions as partial application.
+    const rowsWithTotal = R.append(totalRow(meals), rows);
+    return tbody({ className }, rowsWithTotal);
+}
+
+const headerRow = tr([ //given that the header row never changes dynamically, it doesn't need to be in a function.
+        cell(th, 'p2 tl', 'Meal'),
+        cell(th, 'p2 tr', 'Calories'),
+    ]);
+
+const mealHeader = thead(headerRow); //Meal header doesn't change either, therefore it is not a function.
+
+function totalRow(meals) {
+    const total = R.pipe(
+        R.map(meal => meal.calories),
+        R.reduce((acc, calories) => acc + calories, 0), // 0 is the initial value for the reduce function accumulator   
+        )(meals); //meals is the array of objects passed to the function that R.pipe returns.
+
+    return tr({ className: 'bt b' }, [
+        cell(td, 'pa2 tr', 'Total:'),
+        cell(td, 'pa2 tr', total),
+    ]);
+}
+
+function mealsTable(meals) {
+    return table({ className: 'mw5 center w-100 collapse'}, [
+        mealHeader,
+        mealsBody('', meals),
+    ]);
+}
+
+const node = document.getElementById('app');
+
+const view = mealsTable(MEALS);
+
+node.appendChild(view);
+
+//Find an alternative of printing this HTML table here: https://jsbin.com/nusobel/edit?js,output
+
+//-------------------------------------
+//Declarative vs. Imperative Programming
+//Imagine if you have to give your home address to someone, is it good to just give the address and they find out the direction or you ask them where you stand right now, then you give them exact directions. Giving exact directions is imperative and giving just the address is declarative.
+//jQuery vs. React or jQuery vs. Functional Programm as we did in the above
+
+//Example of Imperative here: https://jsbin.com/timubuj/edit?js,output
+
+/*
+What is Functional Programming?
+Functional programming is a style of programming where you use pure functions almost exclusively.
+
+Reasons for why using pure functions:
+1. Reusable often in the ways you haven't anticipated
+2. Composible in a way so you can combine functions in order to make a new function
+3. Easy to test, you just create some input data, pass it to the function and check the return value
+4. Cacheable, as pure functions always return the same value for a given input, it is easy to cache computationally expensive function calls
+5. Parallelizable, pure functions allow for parallel execution because there is no accessing shared state
+
+Important Note: Functional programming doesn't eleminate 100% state, it eleminates side effects (i.e. changing the data passed to it), otherwise an app without state doesn't make any sense.
+
+Notes:
+* Obviously your app needs state but it should be used in a controlled way
+* Sprinkling your application state all over your app in an uncontrolled way your code gets dirty and harder to work with
+* Most hard to solve bugs are state related
+
+*/
