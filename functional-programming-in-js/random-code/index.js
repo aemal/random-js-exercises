@@ -379,7 +379,6 @@ Pure Function Rules:
 4. Must not cause any side effects (i.e. the code should not cause change outside of itself)
 
 */
-
 function add(x, y) {
     return x + y;
 }

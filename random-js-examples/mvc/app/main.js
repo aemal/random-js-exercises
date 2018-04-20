@@ -56,5 +56,6 @@ app.addComponent({
 });
 
 const router = new Router(app);
-router.addRoute('dogs', '^#/dogs$')
-router.addRoute('dog', '^#/dogs/([0-9]*)$')
+
+router.addRoute('dogs', '^#/dogs$');
+router.addRoute('dog', '^#/dogs/([0-9]*)$');
