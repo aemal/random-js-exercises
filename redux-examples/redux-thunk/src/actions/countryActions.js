@@ -2,24 +2,22 @@ import * as countryActionTypes from '../constants/countryConsts';
 import axios from 'axios';
 import { COUNTRIES_API } from '../config';
 
-export const fetchCountries = () => {
-    return (dispatch) => {
-        
-        
-        //dispatch flag for loading animation
-        dispatch({ type: countryActionTypes.COUNTRIES_FETCHING_STARTED });
+export const requestCountries = () => {
+    return ({type: countryActionTypes.COUNTRIES_FETCHING_STARTED });
+}
 
-
-        return {};
-        //AJAX request with axios
-       /* axios.get(COUNTRIES_API)
+export const fetchCountries = () => (dispatch) => {
+    dispatch(requestCountries());
+    
+    return (
+           axios.get(COUNTRIES_API)
             .then(res => dispatch({ 
                 type: countryActionTypes.COUNTRIES_FETCHED, 
-                res 
+                countriesList: res.data 
             }))
             .catch((err) => dispatch({ 
                 type: countryActionTypes.COUNTRIES_FETCH_ERROR, 
                 err 
-            }));*/
-    };
+            }))
+        );
 }

@@ -9,18 +9,19 @@ const App = (props) => {
    props.fetchCountries();
   }
 
-  const displayCountries = () => {
+  const displayCountries = () => {    
     const countries = props.country.countriesList;
-
-    const counriesJSX = countries.map((country, index) => {
-      return (
-        <li key={index}>{country.countryName}</li>
-      );
-    });
-
+    const counriesJSX = countries.length !== 0
+                        ? countries.map((country, index) => {
+                            return (
+                              <li key={index}>{country.name}</li>
+                            );
+                          })
+                        : <p>Click on Fetch Countries button!</p>;
+    
     return (
       <ul>
-        {counriesJSX}    
+       {counriesJSX}
       </ul>
     );
   }
@@ -33,7 +34,7 @@ const App = (props) => {
   );
 }
 
-const mapStateToProps = ({ country }) => {
+const mapStateToProps = (country) => {
   return ({ country: country.country })
 }
 
