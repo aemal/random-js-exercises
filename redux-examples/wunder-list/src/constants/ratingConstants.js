@@ -1,1 +1,0 @@
-export const RATING_CLICKED = 'RATING_CLICKED';
