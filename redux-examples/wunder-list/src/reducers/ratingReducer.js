@@ -1,20 +1,20 @@
 import * as ratingActionTypes from '../constants/ratingConstants';
 
- const initialState = [
-  ]
+ const initialState = [];
 
 const ratingReducer = (state = initialState, { type, payload }) => {
     switch(type) {
         case ratingActionTypes.RATING_CLICKED :
-        const Todo = state.filter(item => {
+        let existingItem = state.filter(item => {
                return item.id === payload.id
              });
-             const item1 =  !Todo.length ?  [...state, payload]
-           :  Todo.map(item => {
-            return  {...item, rate:payload.rate}
-          })
-
-             return (item1)
+             const newState =  existingItem.length === 0
+              ?  [payload, ...state]
+              : state.map(item =>
+                item.id === payload.id ?
+                { ...item, rate: payload.rate }
+              : item );
+             return (newState)
 
 
 
