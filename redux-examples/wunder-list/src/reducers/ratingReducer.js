@@ -1,24 +1,25 @@
 import * as ratingActionTypes from '../constants/ratingConstants';
 
-const initialState = {
-    id: null,
-    rate: 0
-};
+ const initialState = [
+  {
+    id: 2,
+    rate: 4
+  }, ]
 
 const ratingReducer = (state = initialState, { type, payload }) => {
     switch(type) {
-        case ratingActionTypes.RATING_CLICKED: {
-            console.log(payload)
-            return({
-                ...state,
-                id: payload.id,
-                rate: payload.rate
-            });
-        }
+        case ratingActionTypes.RATING_CLICKED :
+            return state.map(item => {
+                if(item.id === payload.id) {
+                return {...item, rate:payload.rate}
+             }
+             return {
 
-        default: {
-            return({ state });
-        }
+                    payload
+        };
+});
+        default:
+            return state;
     }
 };
 
