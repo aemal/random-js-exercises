@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { Component, Fragment } from 'react'
 
-const App = () => (
-   <h1>Hello  from React Code Challenges....</h1>
-)
-
-export default App
+export default class App extends Component {
+  render(){
+    return (
+      <Fragment>
+      <h1>Hi now its a RCC</h1>
+      </Fragment>
+    )
+  }
+}
