@@ -10,25 +10,35 @@ import { bindActionCreators } from 'redux'
 import * as Actions from '../redux/actions/reviewsActions'
 
 class App extends Component {
+
   componentDidMount(){
     this.props.fetchReviews(1)
+  }
+  loadMore(){
+    let page = this.props.requestedPage + 1;
+    this.props.fetchReviews(page);
   }
   render(){
     const { fetched,
           reviews,
-          error } = this.props
+          error,
+          hasMore } = this.props
 
     const JSX   = fetched === true
-                    ? <Fragment>
-                        <Reviews reviews={reviews} />
-                      </Fragment>
+                    ? <Reviews reviews={reviews} />
                     : <h1 style={{textAlign: 'center'}}>Loading....</h1>
 
   const ValidatedJSX = error === ''
                         ?  (JSX)
                         : <h3>Stop .. open the console. You have nice error :)</h3>
+  const loadMoreBtn = hasMore === false ? null : <button onClick={this.loadMore.bind(this)}>
+                                                  LoadMore
+                                                 </button>
     return (
-          (ValidatedJSX)
+          <Fragment>
+            {ValidatedJSX}
+            {loadMoreBtn}
+            </Fragment>
         )
       }
     }

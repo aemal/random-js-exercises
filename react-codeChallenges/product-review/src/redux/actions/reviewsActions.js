@@ -1,16 +1,17 @@
 import * as reviewsConsts from '../constants/reviewsConsts'
 import axios from 'axios';
 
-export const requestReviews = () => {
+export const requestReviews = (page) => {
   return ({
     type: reviewsConsts.REQUEST_REVIEWS,
-    payload: true
+    payload: true,
+    requestedPage: page
   })
 }
 
 
 export const fetchReviews = (page) => (dispatch) => {
-    dispatch(requestReviews());
+    dispatch(requestReviews(page));
 
     return (
            axios.get(`https:sellics-frontend-test.herokuapp.com/reviews/${page}`, { crossdomain: true })
