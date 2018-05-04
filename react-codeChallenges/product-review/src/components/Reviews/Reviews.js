@@ -6,8 +6,8 @@ import {Review} from './Review'
 
 
 export const Reviews = ({reviews}) => {
-  const mappedReview = reviews.map(r => {
-    return <Review key={r.reviewId} review={r} />
+  const mappedReview = reviews.map((r, index) => {
+    return <Review key={r.reviewId} index={index+1} review={r} />
   })
   return(
     <Fragment>
