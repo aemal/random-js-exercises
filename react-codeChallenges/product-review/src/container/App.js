@@ -2,12 +2,16 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 // Components
-import {Reviews} from '../components/Reviews/Reviews'
+import { Reviews } from '../components/Reviews/Reviews'
 
 //Redux
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from '../redux/actions/reviewsActions'
+
+import { SettingsContext, settings } from '../context/settings';
+
+
 
 class App extends Component {
 
@@ -35,10 +39,13 @@ class App extends Component {
                                                   LoadMore
                                                  </button>
     return (
-          <Fragment>
-            {ValidatedJSX}
-            {loadMoreBtn}
-            </Fragment>
+            <SettingsContext.Provider value={settings}>
+              <Fragment>
+                {ValidatedJSX}
+                {loadMoreBtn}
+              </Fragment>
+            </SettingsContext.Provider>
+
         )
       }
     }
