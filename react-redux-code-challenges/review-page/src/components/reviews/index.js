@@ -4,11 +4,12 @@ import PropTypes from 'prop-types'
 //Component
 import {Review} from './Review'
 import _ from 'lodash';
+import './style.css';
 
 export const Reviews = ({reviews}) => {
   
   const mappedReview = _.map(reviews, ((r, index) => {
-    return <Review key={r.reviewId} index={index+1} review={r} />
+    return <Review key={r.reviewId} review={r} />
   }));
 
   return(

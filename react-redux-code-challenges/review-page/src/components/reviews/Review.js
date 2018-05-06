@@ -9,31 +9,35 @@ export class Review extends Component {
 render() {
   const { index, review } = this.props;
   return (
-  
-      <div className="reviewCard">
-          <h4>{index}. {review.title}</h4>
+      <div className="review-card grid-container">
+          <div className="review-detail">
+            <div className="review-title">{review.title}</div>
+            <div className="review-content">{review.content}</div>
+          </div>
           <Avatar 
+              cssClassName="avatar"
               src={review.productImg} 
               alt="avatar" 
-              width="100px"
+              width="50px"
           />
 
-          <StarRatingComponent
+          <div className="stars">
+            <StarRatingComponent
               name="rating"
               editing={false}
               starCount={5}
               value={review.stars}
             />
-          <p>Date:
-          
-          <SettingsContext.Consumer>
-            {settings => (
-              <Moment format={settings.dateFormat}>{review.reviewCreated}</Moment>
-            )}
-          </SettingsContext.Consumer> 
-         
-          </p>
-          <p>{review.content}</p>
+          </div>
+          <div className="date">
+            <p>Date:
+              <SettingsContext.Consumer>
+                {settings => (
+                  <Moment format={settings.dateFormat}>{review.reviewCreated}</Moment>
+                )}
+              </SettingsContext.Consumer> 
+            </p>
+          </div>
       </div>
 
   )

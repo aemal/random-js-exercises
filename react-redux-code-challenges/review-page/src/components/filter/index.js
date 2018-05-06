@@ -3,6 +3,7 @@ import Search from './Search';
 import Group from './Group';
 import Sort from './Sort';
 import Stars from './Stars';
+import './style.css';
 
 class Filter extends Component {
     render() {
