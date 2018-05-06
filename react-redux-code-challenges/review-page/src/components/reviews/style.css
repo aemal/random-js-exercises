@@ -7,6 +7,7 @@
 @media only screen and (max-width: 768px) {
   .grid-container {
     display: grid;
+    grid-template-columns: 50% 50%;
     grid-template-areas:
       'product-name product-name'
       'avatar avatar'
@@ -14,7 +15,6 @@
       'review-detail review-detail'
       'date date';
     grid-gap: 10px;
-    background-color: #2196F3;
     padding: 10px;
   }
 }
@@ -22,11 +22,11 @@
 @media only screen and (min-width: 768px) {
   .grid-container {
     display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
     grid-template-areas:
       'avatar date stars product-name'
       'review-detail review-detail review-detail review-detail';
     grid-gap: 10px;
-    background-color: #2196F3;
     padding: 10px;
   }
 }

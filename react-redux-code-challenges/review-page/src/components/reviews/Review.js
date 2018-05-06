@@ -22,6 +22,7 @@ render() {
           />
 
           <div className="stars">
+            <div className="secondary-text">STARS</div>
             <StarRatingComponent
               name="rating"
               editing={false}
@@ -30,13 +31,15 @@ render() {
             />
           </div>
           <div className="date">
-            <p>Date:
+              <div className="secondary-text">DATE</div>
               <SettingsContext.Consumer>
                 {settings => (
                   <Moment format={settings.dateFormat}>{review.reviewCreated}</Moment>
                 )}
               </SettingsContext.Consumer> 
-            </p>
+          </div>
+          <div className="product-name">
+                {`${review.productTitle.substr(0, 15)}...`}
           </div>
       </div>
 
