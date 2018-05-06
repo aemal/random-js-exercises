@@ -1,13 +1,20 @@
 import React from 'react';
+import _ from 'lodash';
 
-const Dropdown = ({ options }) => {
-    //const optionsJSX = options
+const Dropdown = ({ options, placeholder }) => {
+    const optionsJSX = _.map(options, (option, index) => {
+        return <option 
+                    key={index} 
+                    value={option.value}
+                >
+                {option.label}
+                </option>
+    });
+
     return (
         <select>
-            <option value="grapefruit">Grapefruit</option>
-            <option value="lime">Lime</option>
-            <option selected value="coconut">Coconut</option>
-            <option value="mango">Mango</option>
+            <option default>{placeholder}</option>
+            {optionsJSX}
         </select>
     );
 };

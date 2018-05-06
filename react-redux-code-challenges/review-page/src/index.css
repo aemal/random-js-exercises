@@ -3,3 +3,22 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.mainContainer {
+  margin: 0 auto;
+  width: 80%;
+  max-width: 900px;
+  padding: 2rem;
+}
+
+.searchBar {
+  width: 50%;
+
+}
+
+.reviewCard {
+  border: 1.5px solid #cececea8; 
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}

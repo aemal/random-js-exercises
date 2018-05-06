@@ -10,7 +10,7 @@ render() {
   const { index, review } = this.props;
   return (
   
-      <Fragment>
+      <div className="reviewCard">
           <h4>{index}. {review.title}</h4>
           <Avatar 
               src={review.productImg} 
@@ -34,7 +34,7 @@ render() {
          
           </p>
           <p>{review.content}</p>
-      </Fragment>
+      </div>
 
   )
 }
