@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 // Components
@@ -20,51 +20,50 @@ class App extends Component {
   componentDidMount(){
     this.props.fetchReviews(1)
   }
-  loadMore(){
+
+  loadMore = () => {
     let page = this.props.requestedPage + 1;
-    this.props.fetchReviews(page);
+    this.props.fetchReviews(page); 
   }
+
   render() {
     const { fetched,
           reviews,
           error,
-          hasMore } = this.props
+          hasMore,
+          filtering,
+          filteredReviews } = this.props
 
+    const _Reviews = filtering ? filteredReviews : reviews
     //Replace with CSS loading spinner
-    const LoadingJSX = <h1 style={{textAlign: 'center'}}>Loading....</h1>; 
+    const LoadingJSX = <h1 style={{textAlign: 'center'}}>Loading....</h1>;
 
     const ReviewsJSX = fetched === true
-      ? <Reviews reviews={reviews} />
+      ? <Reviews loadMore={this.loadMore} hasMore={hasMore} reviews={_Reviews} />
       : LoadingJSX;
+
 
     const ValidatedJSX = error === ''
       ? ReviewsJSX
       : <h3>{generalErrorMessage}</h3>;
-    
-    const loadMoreBtn = hasMore === false 
-      ? null 
-      : <button onClick={this.loadMore.bind(this)}>
-          LoadMore
-        </button>;
-        
+
+
       return (
               <SettingsContext.Provider value={settings}>
                 <div className="mainContainer">
                   <Filter />
                   {ValidatedJSX}
-                  {loadMoreBtn}
                 </div>
               </SettingsContext.Provider>
         );
       }
     }
 App.propTypes = {
-  error: PropTypes.string,
-  fetchReviews: PropTypes.func.isRequired,
-  fetched: PropTypes.bool.isRequired,
-  fetching: PropTypes.bool.isRequired,
-  hasMore: PropTypes.bool.isRequired,
-  reviews: PropTypes.array.isRequired
+  fetchReviews: PropTypes.func,
+  fetched: PropTypes.bool,
+  fetching: PropTypes.bool,
+  hasMore: PropTypes.bool,
+  reviews: PropTypes.array
 }
 
 

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import StarRatingComponent from 'react-star-rating-component';
 import Moment from 'react-moment';
 import Avatar from '../avatar';
@@ -9,15 +9,15 @@ export class Review extends Component {
 render() {
   const { index, review } = this.props;
   return (
-      <div className="review-card grid-container">
+      <div className="grid-container">
           <div className="review-detail">
-            <div className="review-title">{review.title}</div>
+            <div className="review-title">{index}.{review.title}</div>
             <div className="review-content">{review.content}</div>
           </div>
-          <Avatar 
+          <Avatar
               cssClassName="avatar"
-              src={review.productImg} 
-              alt="avatar" 
+              src={review.productImg}
+              alt="avatar"
               width="50px"
           />
 
@@ -36,14 +36,13 @@ render() {
                 {settings => (
                   <Moment format={settings.dateFormat}>{review.reviewCreated}</Moment>
                 )}
-              </SettingsContext.Consumer> 
+              </SettingsContext.Consumer>
           </div>
           <div className="product-name">
-                {`${review.productTitle.substr(0, 15)}...`}
+                {`${review.productTitle.substr(0, 12)}...`}
           </div>
       </div>
 
   )
 }
 }
-

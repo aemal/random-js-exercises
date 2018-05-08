@@ -6,6 +6,7 @@ import Stars from './Stars';
 import './style.css';
 
 class Filter extends Component {
+
     render() {
         return (
             <div>

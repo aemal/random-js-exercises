@@ -6,12 +6,16 @@
 
 @media only screen and (max-width: 768px) {
   .grid-container {
+    border: 1.5px solid #cececea8;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-areas:
       'product-name product-name'
-      'avatar avatar'
       'stars stars'
+      'avatar avatar'
       'review-detail review-detail'
       'date date';
     grid-gap: 10px;
@@ -21,21 +25,17 @@
 
 @media only screen and (min-width: 768px) {
   .grid-container {
+    border: 1.5px solid #cececea8;
+    border-radius: 10px;
+    margin-bottom: 1rem;
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: repeat(4, 1fr);
     grid-template-areas:
       'avatar date stars product-name'
       'review-detail review-detail review-detail review-detail';
     grid-gap: 10px;
     padding: 10px;
   }
-}
-
-.review-card {
-  border: 1.5px solid #cececea8; 
-  border-radius: 10px;
-  padding: 1rem;
-  margin-bottom: 1rem;
 }
 
 .review-title {

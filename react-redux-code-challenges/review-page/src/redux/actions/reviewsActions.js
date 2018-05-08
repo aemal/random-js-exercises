@@ -1,6 +1,33 @@
 import * as reviewsConsts from '../constants/reviewsConsts'
+import * as filterConsts from '../constants/filterConsts'
 import axios from 'axios';
 
+export const setSeacrhKeywords = (keyWords) => {
+  return ({
+    type: filterConsts.SET_SEARCH_KEYWORDS,
+    payload: keyWords
+  })
+}
+
+export const searchByKeywords = (keyWords) => {
+  return ({
+    type: filterConsts.SEARCH_BY_KEYWORDS,
+    payload: keyWords
+  })
+}
+export const setSearchedStarsCount = (count) => {
+  return ({
+    type: filterConsts.SET_SEARCH_STARS_COUNT,
+    payload: count
+  })
+}
+
+export const searchByStars = (count) => {
+  return ({
+    type: filterConsts.SEARCH_BY_STARS,
+    payload: count
+  })
+}
 export const requestReviews = (page) => {
   return ({
     type: reviewsConsts.REQUEST_REVIEWS,
