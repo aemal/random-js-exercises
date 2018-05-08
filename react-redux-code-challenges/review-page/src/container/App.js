@@ -23,7 +23,7 @@ class App extends Component {
 
   loadMore = () => {
     let page = this.props.requestedPage + 1;
-    this.props.fetchReviews(page); 
+    this.props.fetchReviews(page);
   }
 
   render() {
@@ -31,15 +31,19 @@ class App extends Component {
           reviews,
           error,
           hasMore,
-          filtering,
-          filteredReviews } = this.props
+          searchKeyWords,
+          searchStarsCount } = this.props
 
-    const _Reviews = filtering ? filteredReviews : reviews
     //Replace with CSS loading spinner
     const LoadingJSX = <h1 style={{textAlign: 'center'}}>Loading....</h1>;
 
     const ReviewsJSX = fetched === true
-      ? <Reviews loadMore={this.loadMore} hasMore={hasMore} reviews={_Reviews} />
+      ? <Reviews
+          loadMore={this.loadMore}
+          hasMore={hasMore}
+          reviews={reviews}
+          searchKeyWords={searchKeyWords}
+          searchStarsCount={searchStarsCount} />
       : LoadingJSX;
 
 

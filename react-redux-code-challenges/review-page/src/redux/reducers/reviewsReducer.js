@@ -9,9 +9,7 @@ const intialState = {
   reviews: [],
   hasMore: false,
   searchKeyWords: '',
-  searchStarsCount: null,
-  filtering: false,
-  filteredReviews: []
+  searchStarsCount: null
 }
 
 export const reviewsReducer = (state = intialState, action) => {
@@ -21,10 +19,7 @@ export const reviewsReducer = (state = intialState, action) => {
         {...state,
           fetching: action.payload,
           requestedPage: action.requestedPage,
-          searchKeyWords: '',
-          searchByStars: null,
-          searchStarsCount: null,
-          filtering: false,}
+        }
       );
     case reviewsConsts.REVIEWS_FETCHED:
       return (
@@ -42,49 +37,14 @@ export const reviewsReducer = (state = intialState, action) => {
         case filterConsts.SET_SEARCH_KEYWORDS:
         return({
           ...state,
-          searchKeyWords: action.payload,
-          filtering: true
+          searchKeyWords: action.payload
         })
-
-        case filterConsts.SEARCH_BY_KEYWORDS:
-        const FilteredStarsArray = state.reviews.filter(review => {
-            return review.stars === state.searchStarsCount
-          })
-
-        let ArrayToFilter = state.searchStarsCount !== null
-        ? FilteredStarsArray
-        : state.reviews
-        let filteredArrayByKeywords =  ArrayToFilter.filter(review => {
-            return review.title.indexOf(action.payload) !== -1
-          }).map(review => {
-            return review
-          })
-            return ({
-              ...state,
-              filtering: true,
-              filteredReviews: filteredArrayByKeywords
-            })
 
             case filterConsts.SET_SEARCH_STARS_COUNT:
             return({
               ...state,
-              searchStarsCount: action.payload,
-              filtering: true
+              searchStarsCount: action.payload
             })
-
-            case filterConsts.SEARCH_BY_STARS:
-            let filteredArrayByStars =  state.reviews.filter(review => {
-                return review.stars === action.payload
-              }).filter(review => {
-                  return review.title.indexOf(state.searchKeyWords) !== -1
-                }).map(review => {
-                return review
-              })
-                return ({
-                  ...state,
-                  filtering: true,
-                  filteredReviews: filteredArrayByStars
-                })
     default:
      return state
 

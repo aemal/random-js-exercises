@@ -7,17 +7,31 @@ import {Review} from './Review'
 import _ from 'lodash';
 import './style.css';
 
-export const Reviews = ({reviews, loadMore, hasMore}) => {
+export const Reviews = ({reviews, loadMore, hasMore, searchKeyWords, searchStarsCount}) => {
+  const KeyWordFilteredArray = searchKeyWords !== ''
+    ? reviews.filter(review => {
+        return review.title.indexOf(searchKeyWords) !== -1
+      }).map(review => {
+                return review
+              })
+    : reviews
+const StarsFilteredArray = searchStarsCount !== null
+    ? KeyWordFilteredArray.filter(review => {
+                return review.stars === searchStarsCount
+              }).map(review => {
+                return review
+              })
+    : KeyWordFilteredArray
 
-  const mappedReview = reviews.length === 0
+  const mappedReview = StarsFilteredArray.length === 0
                         ? <h1>{`No review matches your search`}</h1>
                         : <InfiniteScroll
-                          dataLength={reviews.length}
+                          dataLength={StarsFilteredArray.length}
                           next={loadMore}
                           hasMore={hasMore}
                           loader={<h4>Loading...</h4>}
                         >
-                        {_.map(reviews, ((r, index) => {
+                        {_.map(StarsFilteredArray, ((r, index) => {
                           return <Review key={r.reviewId} index={index+1} review={r} />
                         })
                       )}

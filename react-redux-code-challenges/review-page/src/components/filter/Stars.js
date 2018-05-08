@@ -14,9 +14,7 @@ class Stars extends Component {
   }
 
   onChangedCheckBox = (val) => {
-
   this.props.setSearchedStarsCount(val)
-  this.props.searchByStars(val)
   }
 
   render() {
@@ -50,7 +48,6 @@ class Stars extends Component {
 const mapStateToProps = (state) => {
    return  {
      checkedBox: state.reviews.searchStarsCount,
-     searchKeyWords: state.reviews.searchKeyWords
    }
 }
 

@@ -9,12 +9,6 @@ export const setSeacrhKeywords = (keyWords) => {
   })
 }
 
-export const searchByKeywords = (keyWords) => {
-  return ({
-    type: filterConsts.SEARCH_BY_KEYWORDS,
-    payload: keyWords
-  })
-}
 export const setSearchedStarsCount = (count) => {
   return ({
     type: filterConsts.SET_SEARCH_STARS_COUNT,
@@ -22,12 +16,6 @@ export const setSearchedStarsCount = (count) => {
   })
 }
 
-export const searchByStars = (count) => {
-  return ({
-    type: filterConsts.SEARCH_BY_STARS,
-    payload: count
-  })
-}
 export const requestReviews = (page) => {
   return ({
     type: reviewsConsts.REQUEST_REVIEWS,

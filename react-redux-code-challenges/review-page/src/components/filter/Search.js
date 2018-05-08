@@ -9,7 +9,6 @@ class Search extends Component {
   handleChange(e) {
     const value = e.target.value.substr(0,15)
     this.props.setSeacrhKeywords(value)
-    this.props.searchByKeywords(value)
   }
 
   render() {
