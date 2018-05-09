@@ -1,13 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import StarRatingComponent from 'react-star-rating-component';
 import Moment from 'react-moment';
 import Avatar from '../avatar';
 import { SettingsContext } from '../../context/settings';
 
-export class Review extends Component {
-
-render() {
-  const { index, review } = this.props;
+export const Review = ({ review, index }) => {
   return (
       <div className="grid-container">
           <div className="review-detail">
@@ -44,5 +42,23 @@ render() {
       </div>
 
   )
-}
+ }
+
+Review.propTypes = {
+  index: PropTypes.number.isRequired,
+  review: PropTypes.shape({
+    authorId: PropTypes.string.isRequired,
+    childAsin: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    country: PropTypes.string.isRequired,
+    created: PropTypes.number.isRequired,
+    productImg: PropTypes.string.isRequired,
+    productTitle: PropTypes.string.isRequired,
+    reviewCreated: PropTypes.number.isRequired,
+    reviewId: PropTypes.string.isRequired,
+    stars: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    verified: PropTypes.bool.isRequired,
+    watched: PropTypes.bool.isRequired
+  }).isRequired
 }

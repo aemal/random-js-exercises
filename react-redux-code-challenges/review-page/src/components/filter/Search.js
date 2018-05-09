@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import Input from '../form-elements/Input';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as Actions from '../../redux/actions/reviewsActions'
+import * as Actions from '../../redux/actions/filtersActions'
 
 class Search extends Component {
 
   handleChange(e) {
     const value = e.target.value.substr(0,15)
-    this.props.setSeacrhKeywords(value)
+    this.props.setSeacrhedKeywords(value)
   }
 
   render() {
@@ -26,9 +27,15 @@ class Search extends Component {
   }
 };
 
+Search.propTypes = {
+  searchKeyWords: PropTypes.string.isRequired,
+  setSeacrhedKeywords: PropTypes.func.isRequired,
+  setSearchedStarsCount: PropTypes.func.isRequired
+}
+
 const mapStateToProps = (state) => {
    return  {
-     searchKeyWords: state.reviews.searchKeyWords
+     searchKeyWords: state.filters.searchKeyWords
    }
 }
 

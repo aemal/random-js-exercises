@@ -1,8 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import StarRatingComponent from 'react-star-rating-component'
+import PropTypes from 'prop-types'
+
+// Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as Actions from '../../redux/actions/reviewsActions'
+import * as Actions from '../../redux/actions/filtersActions'
 
 
 class Stars extends Component {
@@ -20,7 +23,6 @@ class Stars extends Component {
   render() {
     const { checkedBox } = this.props
     const { checkBoxes } = this.state
-
     const JSX = checkBoxes.map(val => {
       return (
               <Fragment key={val}>
@@ -43,11 +45,15 @@ class Stars extends Component {
   }
 }
 
-
+Stars.propTypes = {
+  checkedBox: PropTypes.number.isRequired,
+  setSeacrhedKeywords: PropTypes.func.isRequired,
+  setSearchedStarsCount: PropTypes.func.isRequired
+}
 
 const mapStateToProps = (state) => {
    return  {
-     checkedBox: state.reviews.searchStarsCount,
+     checkedBox: state.filters.searchStarsCount,
    }
 }
 

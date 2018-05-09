@@ -14,7 +14,7 @@ const Avatar = ({ width, src, alt, cssClassName }) => {
     : emptyAvatar;
 
     return (
-        <img 
+        <img
         className={`avatar-image ${cssClassName}`}
         style={style}
         src={imageSrc}

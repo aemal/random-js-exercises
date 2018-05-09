@@ -1,5 +1,4 @@
 import * as reviewsConsts from '../constants/reviewsConsts'
-import * as filterConsts from '../constants/filterConsts'
 
 const intialState = {
   fetching: false,
@@ -8,45 +7,38 @@ const intialState = {
   requestedPage: 1,
   reviews: [],
   hasMore: false,
-  searchKeyWords: '',
-  searchStarsCount: null
 }
 
 export const reviewsReducer = (state = intialState, action) => {
   switch (action.type) {
-    case reviewsConsts.REQUEST_REVIEWS:
+    case reviewsConsts.REQUEST_REVIEWS: {
       return (
         {...state,
-          fetching: action.payload,
-          requestedPage: action.requestedPage,
+          fetching: action.payload.fetching,
+          requestedPage: action.payload.requestedPage
         }
-      );
-    case reviewsConsts.REVIEWS_FETCHED:
+      )
+    }
+
+    case reviewsConsts.REVIEWS_FETCHED: {
       return (
         {...state,
           fetching: false,
           fetched: true,
-          reviews: state.reviews.concat(action.payload.reviews),
-          hasMore: action.payload.hasMore
+          reviews: state.reviews.concat(action.payload.data.reviews),
+          hasMore: action.payload.data.hasMore
         }
       )
-      case reviewsConsts.REVIEWS_FETCH_ERROR:
+    }
+
+      case reviewsConsts.REVIEWS_FETCH_ERROR: {
         return (
-            {...state, error: action.payload, fetching: false}
+            {...state, error: action.payload.err, fetching: false}
         )
-        case filterConsts.SET_SEARCH_KEYWORDS:
-        return({
-          ...state,
-          searchKeyWords: action.payload
-        })
+      }
 
-            case filterConsts.SET_SEARCH_STARS_COUNT:
-            return({
-              ...state,
-              searchStarsCount: action.payload
-            })
-    default:
+    default: {
      return state
-
+   }
   }
 }
