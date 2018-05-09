@@ -1,5 +1,5 @@
-# Review page
-This is review page App using React_Redux. :building_construction:
+# Review page :ok_hand:
+This is review page App using React_Redux.
 
 ## Important Note
 There is some Kindof CORS problem with Backend while making fetch request.
