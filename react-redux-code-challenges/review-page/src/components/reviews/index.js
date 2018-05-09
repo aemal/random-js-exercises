@@ -11,33 +11,39 @@ export const Reviews = ({ reviews,
   loadMore,
   hasMore,
   searchKeyWords,
-  searchStarsCount }) => {
+  searchStarsCount,
+  sortBy }) => {
   const KeyWordFilteredArray = searchKeyWords !== ''
     ? reviews.filter(review => {
         return (
           review.title.toLowerCase().indexOf(searchKeyWords.toLowerCase()) !== -1
         )
-      }).map(review => {
-                return review
-              })
+      })
     : reviews
 const StarsFilteredArray = searchStarsCount !== 0
     ? KeyWordFilteredArray.filter(review => {
                 return review.stars === searchStarsCount
-              }).map(review => {
-                return review
               })
     : KeyWordFilteredArray
-
-  const mappedReview = StarsFilteredArray.length === 0
+const SortByAscArray = sortBy === "ASCENDING"
+    ? StarsFilteredArray
+    : StarsFilteredArray.sort((a, b) => {
+        return b.reviewCreated - a.reviewCreated;
+      })
+const SortedArray = sortBy === "DESCENDING"
+    ? SortByAscArray
+    : SortByAscArray.sort((a, b) => {
+        return a.reviewCreated - b.reviewCreated;
+      })
+  const mappedReview = SortedArray.length === 0
                         ? <h1>{`No review matches your search`}</h1>
                         : <InfiniteScroll
-                          dataLength={StarsFilteredArray.length}
+                          dataLength={SortedArray.length}
                           next={loadMore}
                           hasMore={hasMore}
                           loader={<h4>Loading...</h4>}
                         >
-                        {_.map(StarsFilteredArray, ((r, index) => {
+                        {_.map(SortedArray, ((r, index) => {
                           return <Review
                                     key={r.reviewId}
                                     index={index+1}

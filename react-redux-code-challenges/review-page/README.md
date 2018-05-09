@@ -1,5 +1,5 @@
 # Review page :ok_hand:
-This is review page App using React_Redux.
+This is review page App using React & Redux.
 
 ## Important Note
 The lazy programmer of the REST API forgot to enable CORS on his endpoint, therefore while fetching AJAX request, "No 'Access-Control-Allow-Origin' header is present on the requested resource" error occurs, in order to avoid it please install this [Chrome Extension](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en).

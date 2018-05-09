@@ -2,6 +2,9 @@ import React from 'react';
 import Dropdown from '../form-elements/Dropdown';
 
 const Group = () => {
+  let onChange = (e) => {
+      console.log(e.target.value)
+  }
     const options = [
         {value: 'day', label: 'Group by Day'},
         {value: 'week', label: 'Group by Week'},
@@ -9,9 +12,9 @@ const Group = () => {
     ];
 
     return (
-        <Dropdown 
+        <Dropdown
             options={options}
-            placeholder="Group by"
+            onOptionChanged={onChange}
         />
     );
 };

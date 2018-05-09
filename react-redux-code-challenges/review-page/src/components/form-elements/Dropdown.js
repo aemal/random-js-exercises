@@ -2,19 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
-const Dropdown = ({ options, placeholder }) => {
+const Dropdown = ({ options, onOptionChanged }) => {
     const optionsJSX = _.map(options, (option, index) => {
         return <option
                     key={index}
-                    value={option.value}
-                >
-                {option.label}
+                    value={option.value}>
+                    {option.label}
                 </option>
     });
 
     return (
-        <select>
-            <option default>{placeholder}</option>
+        <select
+          onChange={(e) => onOptionChanged(e)}>
             {optionsJSX}
         </select>
     );
@@ -25,6 +24,6 @@ Dropdown.propTypes = {
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired
     }).isRequired).isRequired,
-    placeholder: PropTypes.string.isRequired
+    onOptionChanged: PropTypes.func.isRequired
 };
 export default Dropdown;

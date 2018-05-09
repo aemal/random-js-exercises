@@ -48,7 +48,8 @@ class Stars extends Component {
 Stars.propTypes = {
   checkedBox: PropTypes.number.isRequired,
   setSeacrhedKeywords: PropTypes.func.isRequired,
-  setSearchedStarsCount: PropTypes.func.isRequired
+  setSearchedStarsCount: PropTypes.func.isRequired,
+  setSortBy: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {

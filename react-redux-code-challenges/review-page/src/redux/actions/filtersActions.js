@@ -13,3 +13,10 @@ export const setSearchedStarsCount = (count) => {
     payload: { count }
   })
 }
+
+export const setSortBy = (sortBy) => {
+  return ({
+    type: filterConsts.SET_SORT_BY,
+    payload: { sortBy }
+  })
+}

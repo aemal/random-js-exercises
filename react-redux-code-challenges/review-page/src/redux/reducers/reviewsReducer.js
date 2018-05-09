@@ -33,7 +33,7 @@ export const reviewsReducer = (state = intialState, action) => {
 
       case reviewsConsts.REVIEWS_FETCH_ERROR: {
         return (
-            {...state, error: action.payload.err, fetching: false}
+            {...state, error: action.payload.err.message, fetching: false}
         )
       }
 

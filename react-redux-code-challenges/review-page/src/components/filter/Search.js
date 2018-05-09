@@ -30,7 +30,8 @@ class Search extends Component {
 Search.propTypes = {
   searchKeyWords: PropTypes.string.isRequired,
   setSeacrhedKeywords: PropTypes.func.isRequired,
-  setSearchedStarsCount: PropTypes.func.isRequired
+  setSearchedStarsCount: PropTypes.func.isRequired,
+  setSortBy:  PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {
