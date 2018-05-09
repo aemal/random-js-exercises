@@ -1,5 +1,5 @@
 # Review page
-This is review page App using React_Redux. :simple_smile:
+This is review page App using React_Redux. :smile:
 
 ## Important Note
 There is some Kindof CORS problem with Backend while making fetch request.
