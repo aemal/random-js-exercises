@@ -2,8 +2,7 @@
 This is review page App using React_Redux.
 
 ## Important Note
-There is some Kindof CORS problem with Backend while making fetch request.
-You have to install this Allow-Control-Allow-Origin: * [Chrome Extension](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en) in order to run the app successfully.
+The lazy programmer of the REST API forgot to enable CORS on his endpoint, therefore while fetching AJAX request, "No 'Access-Control-Allow-Origin' header is present on the requested resource" error occurs, in order to avoid it please install this [Chrome Extension](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en).
 
 ### To run the app locally
 ```
