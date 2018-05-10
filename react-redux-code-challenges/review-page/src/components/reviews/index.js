@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import InfiniteScroll from "react-infinite-scroll-component";
 import _ from 'lodash';
@@ -6,6 +6,10 @@ import './style.css';
 import moment from  'moment'
 //Component
 import {Review} from './Review'
+
+// Global decalartions
+let last;
+let weekFirstDay = "Sunday"
 
 export const Reviews = ({ reviews,
   loadMore,
@@ -15,12 +19,6 @@ export const Reviews = ({ reviews,
   sortBy,
   groupBy,
   Grouping }) => {
-
-  const groupByText = (reviewDate) => {
-
-    return (<div>{moment(reviewDate).format('MMMM-YYYY')}</div>);
-  }
-
   const KeyWordFilteredArray = searchKeyWords !== ''
     ? reviews.filter(review => {
         return (
@@ -47,15 +45,41 @@ export const Reviews = ({ reviews,
         return a.reviewCreated - b.reviewCreated;
       })
 
-      
+  const GroupedByMonth = (date) => {
+    let GroupedByMonthJSX = last !== moment(date).format(groupBy) && <div>{moment(date).format(groupBy)}</div>
+    last = moment(date).format(groupBy);
+    return GroupedByMonthJSX
+  }
 
+  const GroupedByWeek = (date) => {
+    let weekNo = moment(date).isoWeek();
+    let weekStartDate = moment().day(weekFirstDay).week(weekNo).format(groupBy);
+    let weekEndDate = moment(weekStartDate).add(6, 'days').format(groupBy);
+    let GroupedByWeekJSX = last !== weekEndDate && <div>{`${weekStartDate} - ${weekEndDate}`}</div>
+    last = weekEndDate;
+    return GroupedByWeekJSX
+  }
+
+  const GroupedByDay = (date) => {
+    let GroupedByDayJSX = last !== moment(date).format(groupBy) && <div>{moment(date).format(groupBy)}</div>
+    last = moment(date).format(groupBy);
+    return GroupedByDayJSX
+  }
+
+  const GroupedByJSX = (review) => {
+    let res = Grouping && groupBy === 'MMMM-YYYY'
+                    ? GroupedByMonth(review.reviewCreated)
+                    : groupBy === 'DD.MMM'
+                    ? GroupedByWeek(review.reviewCreated)
+                    : groupBy === 'dddd'
+                    ? GroupedByDay(review.reviewCreated)
+                    : null
+    return res
+  }
   const mappedReview = () => {
     if(SortedArray.length === 0) {
       return (<h1>{`No review matches your search`}</h1>);
-    } 
-
-    let lastMonth;
-    let groupBy = "MMMM-YYYY";
+    }
     return (
       <InfiniteScroll
             dataLength={SortedArray.length}
@@ -63,23 +87,12 @@ export const Reviews = ({ reviews,
             hasMore={hasMore}
             loader={<h4>Loading...</h4>}
           >
-          
-          {_.map(SortedArray, ((r, index) => {
-            
-            let groupByJSX = lastMonth !== moment(r.reviewCreated).format(groupBy)
-              ? <div>{moment(r.reviewCreated).isoWeek()}</div>
-              : <div>{moment(r.reviewCreated).isoWeek()}</div>;
 
-            
-            lastMonth = moment(r.reviewCreated).format(groupBy);
-            
-            let weekNo = moment(r.reviewCreated).isoWeek();
-            let weekStartDate = moment().day("Sunday").week(weekNo).format("DD.MMM");
-            let weekEndDate = moment(weekStartDate).add(6, 'days').format("DD.MMM");
+          {_.map(SortedArray, ((r, index) => {
 
             return (
-                <div key={r.reviewId}>   
-                  <div>{`${weekStartDate} - ${weekEndDate}`}</div>
+                <div key={r.reviewId}>
+                <div>{GroupedByJSX(r)}</div>
                   <Review
                       index={index+1}
                       review={r} />
@@ -89,8 +102,8 @@ export const Reviews = ({ reviews,
         )}
       </InfiniteScroll>
     );
-  } 
-   
+  }
+
   return(
     <div className="reviews">
       {mappedReview()}

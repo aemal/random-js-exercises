@@ -13,9 +13,9 @@ const Group = ({ setGroupBy }) => {
     setGroupBy(groupBy)
   }
     const options = [
-        {value: 'DAY', label: 'Group by Day'},
-        {value: 'WEEK', label: 'Group by Week'},
-        {value: 'MONTH', label: 'Group by Month'}
+        {value: 'dddd', label: 'Group by Day'},
+        {value: 'DD.MMM', label: 'Group by Week'},
+        {value: 'MMMM-YYYY', label: 'Group by Month'}
     ];
 
     const defaultOption = {value: '', label: 'Group by'}
