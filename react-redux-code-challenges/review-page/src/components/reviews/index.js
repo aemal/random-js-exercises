@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import InfiniteScroll from "react-infinite-scroll-component";
 import _ from 'lodash';
 import './style.css';
-
+import moment from  'moment'
 //Component
 import {Review} from './Review'
 
@@ -12,7 +12,31 @@ export const Reviews = ({ reviews,
   hasMore,
   searchKeyWords,
   searchStarsCount,
-  sortBy }) => {
+  sortBy,
+  groupBy,
+  Grouping }) => {
+  const Array = [
+    "January": [],
+    "Feburary": [],
+    "March": [],
+    "April": [],
+    "May": [],
+    "June": [],
+    "July": [],
+    "August": [],
+    "September": [],
+    "October": [],
+    "November": [],
+    "December": []
+  ]
+  const GroupedArray = groupBy === "MONTH"
+        ? reviews.reduce((array, review) => {
+          return array.map((month, index) => {
+            return console.log(moment(review.reviewCreated).format('M'))
+          })
+        }, Array)
+        : reviews
+        console.log(Array)
   const KeyWordFilteredArray = searchKeyWords !== ''
     ? reviews.filter(review => {
         return (
@@ -25,12 +49,12 @@ const StarsFilteredArray = searchStarsCount !== 0
                 return review.stars === searchStarsCount
               })
     : KeyWordFilteredArray
-const SortByAscArray = sortBy === "ASCENDING"
+const SortByAscArray = sortBy !== "" && sortBy === "ASCENDING"
     ? StarsFilteredArray
     : StarsFilteredArray.sort((a, b) => {
         return b.reviewCreated - a.reviewCreated;
       })
-const SortedArray = sortBy === "DESCENDING"
+const SortedArray = sortBy !== "" && sortBy === "DESCENDING"
     ? SortByAscArray
     : SortByAscArray.sort((a, b) => {
         return a.reviewCreated - b.reviewCreated;
@@ -78,5 +102,8 @@ Reviews.propTypes = {
   loadMore: PropTypes.func.isRequired,
   hasMore: PropTypes.bool.isRequired,
   searchKeyWords: PropTypes.string.isRequired,
-  searchStarsCount: PropTypes.number.isRequired
+  searchStarsCount: PropTypes.number.isRequired,
+  sortBy: PropTypes.string.isRequired,
+  groupBy: PropTypes.string.isRequired,
+  Grouping: PropTypes.bool.isRequired
 }

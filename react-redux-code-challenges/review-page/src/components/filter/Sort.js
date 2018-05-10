@@ -14,13 +14,14 @@ const Sort = ({ setSortBy }) => {
     setSortBy(sortBy)
   }
     const options = [
-        { value: 'ASCENDING', label: 'Sort By Ascending' },
         { value: 'DESCENDING', label: 'Sort By Descending' }
     ];
+    const defaultOption = { value: 'ASCENDING', label: 'Sort By Ascending' }
     return (
         <Dropdown
             options={options}
             onOptionChanged={onChange}
+            defaultOption={defaultOption}
         />
     );
 };
