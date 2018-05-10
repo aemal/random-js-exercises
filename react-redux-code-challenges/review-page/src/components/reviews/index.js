@@ -15,28 +15,7 @@ export const Reviews = ({ reviews,
   sortBy,
   groupBy,
   Grouping }) => {
-  const Array = [
-    "January": [],
-    "Feburary": [],
-    "March": [],
-    "April": [],
-    "May": [],
-    "June": [],
-    "July": [],
-    "August": [],
-    "September": [],
-    "October": [],
-    "November": [],
-    "December": []
-  ]
-  const GroupedArray = groupBy === "MONTH"
-        ? reviews.reduce((array, review) => {
-          return array.map((month, index) => {
-            return console.log(moment(review.reviewCreated).format('M'))
-          })
-        }, Array)
-        : reviews
-        console.log(Array)
+
   const KeyWordFilteredArray = searchKeyWords !== ''
     ? reviews.filter(review => {
         return (
