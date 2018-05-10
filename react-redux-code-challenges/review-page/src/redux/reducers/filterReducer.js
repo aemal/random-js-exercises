@@ -3,7 +3,9 @@ import * as filterConsts from '../constants/filterConsts'
 const intialState = {
   searchKeyWords: '',
   searchStarsCount: 0,
-  sortBy: "ASCENDING"
+  sortBy: 'ASCENDING',
+  groupBy: '',
+  Grouping: false
 }
 
 
@@ -27,6 +29,17 @@ export const filterReducer = (state = intialState, action) => {
         return({
           ...state,
           sortBy: action.payload.sortBy
+        })
+      }
+
+      case filterConsts.SET_GROUP_BY: {
+        const GroupingRes = action.payload.groupBy !== ''
+            ? true
+            : false
+        return({
+          ...state,
+          groupBy: action.payload.groupBy,
+          Grouping: GroupingRes
         })
       }
 

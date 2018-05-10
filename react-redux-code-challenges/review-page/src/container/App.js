@@ -30,7 +30,9 @@ class App extends Component {
 
     const { searchKeyWords,
           searchStarsCount,
-          sortBy } = this.props.filters
+          sortBy,
+          Grouping,
+          groupBy } = this.props.filters
 
     //Replace with CSS loading spinner
     const LoadingJSX = <h1 style={{textAlign: 'center'}}>Loading....</h1>;
@@ -41,6 +43,8 @@ class App extends Component {
           hasMore={hasMore}
           reviews={reviews}
           sortBy={sortBy}
+          Grouping={Grouping}
+          groupBy={groupBy}
           searchKeyWords={searchKeyWords}
           searchStarsCount={searchStarsCount} />
       : LoadingJSX;
@@ -87,7 +91,9 @@ App.propTypes = {
   filters: PropTypes.shape({
     searchKeyWords: PropTypes.string.isRequired,
     searchStarsCount: PropTypes.number.isRequired,
-    sortBy: PropTypes.string.isRequired
+    sortBy: PropTypes.string.isRequired,
+    groupBy: PropTypes.string.isRequired,
+    Grouping: PropTypes.bool.isRequired
   }).isRequired,
   requestReviews: PropTypes.func.isRequired,
   fetchReviews: PropTypes.func.isRequired

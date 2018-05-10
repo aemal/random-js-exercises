@@ -20,3 +20,10 @@ export const setSortBy = (sortBy) => {
     payload: { sortBy }
   })
 }
+
+export const setGroupBy = (groupBy) => {
+  return({
+    type: filterConsts.SET_GROUP_BY,
+    payload: { groupBy }
+  })
+}
