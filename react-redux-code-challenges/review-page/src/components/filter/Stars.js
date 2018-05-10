@@ -17,7 +17,10 @@ class Stars extends Component {
   }
 
   onChangedCheckBox = (val) => {
-  this.props.setSearchedStarsCount(val)
+    const value = this.props.checkedBox === val
+                  ? 0
+                  : val
+  this.props.setSearchedStarsCount(value)
   }
 
   render() {
