@@ -27,3 +27,9 @@ export const setGroupBy = (groupBy) => {
     payload: { groupBy }
   })
 }
+
+export const refreshFilter = () => {
+  return ({
+    type: filterConsts.REFRESH_FILTER
+  })
+}

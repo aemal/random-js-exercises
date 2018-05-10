@@ -13,7 +13,7 @@ const Group = ({ setGroupBy }) => {
     setGroupBy(groupBy)
   }
     const options = [
-        {value: 'dddd', label: 'Group by Day'},
+        {value: 'DD.MM.YYYY', label: 'Group by Day'},
         {value: 'DD.MMM', label: 'Group by Week'},
         {value: 'MMMM-YYYY', label: 'Group by Month'}
     ];

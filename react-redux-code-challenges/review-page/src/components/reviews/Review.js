@@ -9,7 +9,7 @@ export const Review = ({ review, index }) => {
   return (
       <div className="grid-container">
           <div className="review-detail">
-            <div className="review-title">{index}.{review.title}</div>
+            <div className="review-title">{review.title}</div>
             <div className="review-content">{review.content}</div>
           </div>
           <Avatar
@@ -45,7 +45,6 @@ export const Review = ({ review, index }) => {
  }
 
 Review.propTypes = {
-  index: PropTypes.number.isRequired,
   review: PropTypes.shape({
     authorId: PropTypes.string.isRequired,
     childAsin: PropTypes.string.isRequired,

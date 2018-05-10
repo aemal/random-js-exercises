@@ -10,7 +10,8 @@ import Filter from '../components/filter';
 //Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as Actions from '../redux/actions/reviewsActions'
+import * as ReviewActions from '../redux/actions/reviewsActions'
+import * as FilterActions from '../redux/actions/filtersActions'
 
 class App extends Component {
   componentDidMount(){
@@ -50,7 +51,7 @@ class App extends Component {
       : LoadingJSX;
 
 
-    const ValidatedJSX = error === ''
+    const ValidatedReviewsJSX = error === ''
       ? ReviewsJSX
       : <h3>{generalErrorMessage}</h3>
 
@@ -59,12 +60,20 @@ class App extends Component {
               <SettingsContext.Provider value={settings}>
                 <div className="mainContainer">
                   <Filter />
-                  {ValidatedJSX}
+                  <button onClick={() => this.props.refreshFilter()}>Refresh</button>
+                  {ValidatedReviewsJSX}
                 </div>
               </SettingsContext.Provider>
         );
       }
     }
+
+/*
+Note: It is a good practice to validate the REST API columns on 
+proptypes, so that if a column name is missing from the REST API 
+it can be caught here ¯\_(ツ)_/¯
+*/
+
 App.propTypes = {
   reviews: PropTypes.shape({
     fetching: PropTypes.bool.isRequired,
@@ -95,6 +104,7 @@ App.propTypes = {
     groupBy: PropTypes.string.isRequired,
     Grouping: PropTypes.bool.isRequired
   }).isRequired,
+  refreshFilter: PropTypes.func.isRequired,
   requestReviews: PropTypes.func.isRequired,
   fetchReviews: PropTypes.func.isRequired
 }
@@ -108,7 +118,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(Actions, dispatch)
+  return bindActionCreators({...ReviewActions, ...FilterActions}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

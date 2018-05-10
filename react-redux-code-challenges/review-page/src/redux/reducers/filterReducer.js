@@ -43,6 +43,16 @@ export const filterReducer = (state = intialState, action) => {
         })
       }
 
+      case filterConsts.REFRESH_FILTER: {
+        return ({
+          searchKeyWords: '',
+          searchStarsCount: 0,
+          sortBy: 'ASCENDING',
+          groupBy: '',
+          Grouping: false
+        });
+      }
+
     default: {
      return state
    }

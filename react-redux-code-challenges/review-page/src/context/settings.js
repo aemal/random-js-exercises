@@ -1,7 +1,7 @@
 import { createContext } from 'react'
 
 export const settings = {
-    dateFormat: "MM.DD.YYYY"
+    dateFormat: "DD.MM.YYYY"
   };
 
 export const SettingsContext = createContext(settings);
