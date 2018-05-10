@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import InfiniteScroll from "react-infinite-scroll-component";
 import _ from 'lodash';
@@ -16,6 +16,11 @@ export const Reviews = ({ reviews,
   groupBy,
   Grouping }) => {
 
+  const groupByText = (reviewDate) => {
+
+    return (<div>{moment(reviewDate).format('MMMM-YYYY')}</div>);
+  }
+
   const KeyWordFilteredArray = searchKeyWords !== ''
     ? reviews.filter(review => {
         return (
@@ -23,40 +28,72 @@ export const Reviews = ({ reviews,
         )
       })
     : reviews
-const StarsFilteredArray = searchStarsCount !== 0
+
+  const StarsFilteredArray = searchStarsCount !== 0
     ? KeyWordFilteredArray.filter(review => {
                 return review.stars === searchStarsCount
               })
     : KeyWordFilteredArray
-const SortByAscArray = sortBy !== "" && sortBy === "ASCENDING"
+
+  const SortByAscArray = sortBy !== "" && sortBy === "ASCENDING"
     ? StarsFilteredArray
     : StarsFilteredArray.sort((a, b) => {
         return b.reviewCreated - a.reviewCreated;
       })
-const SortedArray = sortBy !== "" && sortBy === "DESCENDING"
+
+  const SortedArray = sortBy !== "" && sortBy === "DESCENDING"
     ? SortByAscArray
     : SortByAscArray.sort((a, b) => {
         return a.reviewCreated - b.reviewCreated;
       })
-  const mappedReview = SortedArray.length === 0
-                        ? <h1>{`No review matches your search`}</h1>
-                        : <InfiniteScroll
-                          dataLength={SortedArray.length}
-                          next={loadMore}
-                          hasMore={hasMore}
-                          loader={<h4>Loading...</h4>}
-                        >
-                        {_.map(SortedArray, ((r, index) => {
-                          return <Review
-                                    key={r.reviewId}
-                                    index={index+1}
-                                    review={r} />
-                        })
-                      )}
-                        </InfiniteScroll>
+
+      
+
+  const mappedReview = () => {
+    if(SortedArray.length === 0) {
+      return (<h1>{`No review matches your search`}</h1>);
+    } 
+
+    let lastMonth;
+    let groupBy = "MMMM-YYYY";
+    return (
+      <InfiniteScroll
+            dataLength={SortedArray.length}
+            next={loadMore}
+            hasMore={hasMore}
+            loader={<h4>Loading...</h4>}
+          >
+          
+          {_.map(SortedArray, ((r, index) => {
+            
+            let groupByJSX = lastMonth !== moment(r.reviewCreated).format(groupBy)
+              ? <div>{moment(r.reviewCreated).isoWeek()}</div>
+              : <div>{moment(r.reviewCreated).isoWeek()}</div>;
+
+            
+            lastMonth = moment(r.reviewCreated).format(groupBy);
+            
+            let weekNo = moment(r.reviewCreated).isoWeek();
+            let weekStartDate = moment().day("Sunday").week(weekNo).format("DD.MMM");
+            let weekEndDate = moment(weekStartDate).add(6, 'days').format("DD.MMM");
+
+            return (
+                <div key={r.reviewId}>   
+                  <div>{`${weekStartDate} - ${weekEndDate}`}</div>
+                  <Review
+                      index={index+1}
+                      review={r} />
+                </div>
+              );
+          })
+        )}
+      </InfiniteScroll>
+    );
+  } 
+   
   return(
     <div className="reviews">
-      {mappedReview}
+      {mappedReview()}
     </div>
   )
 }

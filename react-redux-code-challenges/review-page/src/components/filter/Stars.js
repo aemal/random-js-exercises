@@ -34,6 +34,7 @@ class Stars extends Component {
                   value={val}
                   checked={checkedBox >= val ? true : false}
                   onChange={this.onChangedCheckBox.bind(null, val)} />
+                  {val}
                   <StarRatingComponent
                                   name={`RatingStar${val}`}
                                   starCount={1}
