@@ -10,6 +10,7 @@ const Dropdown = ({ options, onOptionChanged, defaultOption }) => {
                     {option.label}
                 </option>
     });
+
     const {value, label} = defaultOption
     return (
         <select
