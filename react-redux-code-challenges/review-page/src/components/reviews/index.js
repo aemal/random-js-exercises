@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import InfiniteScroll from "react-infinite-scroll-component";
 import _ from 'lodash';
@@ -97,11 +97,11 @@ export const Reviews = ({ reviews,
           {_.map(SortedArray, ((r, index) => {
 
             return (
-                <div key={r.reviewId}>
+                <Fragment key={r.reviewId}>
                 <div>{GroupedByJSX(r)}</div>
                   <Review
                       review={r} />
-                </div>
+                </Fragment>
               );
           })
         )}

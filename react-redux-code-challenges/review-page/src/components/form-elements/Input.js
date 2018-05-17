@@ -1,27 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Input } from 'semantic-ui-react'
 
-const Input = ({
+const InputElement = ({
     placeholder,
     cssClassName,
     value,
     handleChange
 }) => {
     return (
-        <input
+        <Input
+            fluid
+            size='small'
             placeholder={placeholder}
             className={`${cssClassName}`}
             value={value}
             onChange={(e) => handleChange(e)}
+            icon={{ name: 'search', circular: true, link: true }}
         />
     );
 };
 
-Input.propTypes = {
+InputElement.propTypes = {
     placeholder: PropTypes.string.isRequired,
     cssClassName: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     handleChange: PropTypes.func.isRequired
 };
 
-export default Input;
+export default InputElement;

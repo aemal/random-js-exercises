@@ -1,5 +1,5 @@
 import * as reviewsConsts from '../constants/reviewsConsts'
-
+import { CrosErrorMessage } from '../../const/errorMessages'
 const intialState = {
   fetching: false,
   fetched: false,
@@ -32,8 +32,10 @@ export const reviewsReducer = (state = intialState, action) => {
     }
 
       case reviewsConsts.REVIEWS_FETCH_ERROR: {
+        let error = action.payload.err.message
+        console.warn(CrosErrorMessage)
         return (
-            {...state, error: action.payload.err.message, fetching: false}
+            {...state, error, fetching: false}
         )
       }
 

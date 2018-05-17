@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Sticky, Card, Grid, Segment, Rail, Button } from 'semantic-ui-react'
+import { Sticky, Grid, Segment, Rail, Button } from 'semantic-ui-react'
 
 // Components
 import { Reviews } from '../components/reviews'
@@ -27,7 +27,6 @@ class App extends Component {
     let page = this.props.reviews.requestedPage + 1;
     this.props.fetchReviews(page);
   }
-
   render() {
     const { fetched,
           reviews,
@@ -48,9 +47,9 @@ class App extends Component {
           loadMore={this.loadMore}
           hasMore={hasMore}
           reviews={reviews}
-          sortBy={sortBy}
+          sortBy={sortBy.value}
           Grouping={Grouping}
-          groupBy={groupBy}
+          groupBy={groupBy.value}
           searchKeyWords={searchKeyWords}
           searchStarsCount={searchStarsCount} />
       : LoadingJSX;
@@ -58,7 +57,6 @@ class App extends Component {
     const ValidatedReviewsJSX = error === ''
       ? ReviewsJSX
       : <h3>{generalErrorMessage}</h3>
-
       return (
         <Grid columns={2}>
        <Grid.Column>
@@ -68,13 +66,13 @@ class App extends Component {
            {ValidatedReviewsJSX}
              <Rail position='right'>
                <Sticky active={true} context={contextRef}>
-               <Card>
+               <Segment>
                <Filter />
                <Button basic
                        color='red'
                        content='Refresh'
                        onClick={() => this.props.refreshFilter()} />
-               </Card>
+               </Segment>
                </Sticky>
              </Rail>
            </Segment>
@@ -118,8 +116,14 @@ App.propTypes = {
   filters: PropTypes.shape({
     searchKeyWords: PropTypes.string.isRequired,
     searchStarsCount: PropTypes.number.isRequired,
-    sortBy: PropTypes.string.isRequired,
-    groupBy: PropTypes.string.isRequired,
+    sortBy: PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      text:PropTypes.string.isRequired
+    }).isRequired,
+    groupBy: PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      text:PropTypes.string.isRequired
+    }).isRequired,
     Grouping: PropTypes.bool.isRequired
   }).isRequired,
   refreshFilter: PropTypes.func.isRequired,

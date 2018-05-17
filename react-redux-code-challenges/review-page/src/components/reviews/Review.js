@@ -1,30 +1,49 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Card } from 'semantic-ui-react'
-import StarRatingComponent from 'react-star-rating-component';
+import { Card, Rating } from 'semantic-ui-react'
 import Moment from 'react-moment';
-import Avatar from '../avatar';
+ import Avatar from '../avatar';
 import { SettingsContext } from '../../context/settings';
 
 export const Review = ({ review, index }) => {
   return (
-    <Card fluid color='yellow'>
-      <Card.Content>
-        <Card.Header>
-        <div className="review-title">{review.title}</div>
-        </Card.Header>
-        <Card.Meta>
-        <SettingsContext.Consumer>
-          {settings => (
-            <Moment format={settings.dateFormat}>{review.reviewCreated}</Moment>
-          )}
-        </SettingsContext.Consumer>
-        </Card.Meta>
-        <Card.Description>
-        <div className="review-content">{review.content}</div>
-        </Card.Description>
-      </Card.Content>
-    </Card>
+      <Card className="fluid">
+      <div className="review-container">
+        <div className="review-detail">
+          <div className="review-title">{review.title}</div>
+          <div className="review-content">{review.content}</div>
+        </div>
+        <Avatar
+            className="avatar"
+            src={review.productImg}
+            alt="avatar"
+            width="50px"
+        />
+
+        <div className="stars">
+          <div className="secondary-text">STARS</div>
+          <Rating
+            name="rating"
+            icon='star'
+            maxRating={5}
+            defaultRating={review.stars}
+            disabled
+          />
+        </div>
+        <div className="date">
+            <div className="secondary-text">DATE</div>
+            <SettingsContext.Consumer>
+              {settings => (
+                <Moment format={settings.dateFormat}>{review.reviewCreated}</Moment>
+              )}
+            </SettingsContext.Consumer>
+        </div>
+        <div className="product-name">
+              {`${review.productTitle.substr(0, 12)}...`}
+        </div>
+    </div>
+
+      </Card>
   )
  }
 

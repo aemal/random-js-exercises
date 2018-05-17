@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import StarRatingComponent from 'react-star-rating-component'
+import { Checkbox } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 
 // Redux
@@ -29,7 +30,7 @@ class Stars extends Component {
     const JSX = checkBoxes.map(val => {
       return (
               <Fragment key={val}>
-                <input
+                <Checkbox
                   type="checkbox"
                   value={val}
                   checked={checkedBox >= val ? true : false}

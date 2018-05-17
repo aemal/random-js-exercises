@@ -1,39 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import Dropdown from '../form-elements/Dropdown';
+import DropdownElement from '../form-elements/Dropdown';
 
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from '../../redux/actions/filtersActions'
 
-const Group = ({ setGroupBy }) => {
-  let onChange = (e) => {
-    const groupBy = e.target.value
+const Group = ({ setGroupBy, DefaultText }) => {
+  let onChange = (e, { value }) => {
+    let text = e.target.innerText
+    let groupBy = {
+      value,
+      text
+    }
     setGroupBy(groupBy)
   }
     const options = [
-        {value: 'DD.MM.YYYY', label: 'Group by Day'},
-        {value: 'DD.MMM', label: 'Group by Week'},
-        {value: 'MMMM-YYYY', label: 'Group by Month'}
+        {value: 'DD.MM.YYYY', text: 'Group by Day'},
+        {value: 'DD.MMM', text: 'Group by Week'},
+        {value: 'MMMM-YYYY', text: 'Group by Month'}
     ];
-
-    const defaultOption = {value: '', label: 'Group by'}
     return (
-        <Dropdown
+        <DropdownElement
             options={options}
+            text={DefaultText}
+            icon='calendar outline'
             onOptionChanged={onChange}
-            defaultOption={defaultOption}
         />
     );
 };
 
 Group.propTypes = {
-  setGroupBy: PropTypes.func.isRequired
+  setGroupBy: PropTypes.func.isRequired,
+  DefaultText: PropTypes.string.isRequired
 }
 
+const mapStateToProps = (state) => {
+   return  {
+     DefaultText: state.filters.groupBy.text,
+   }
+}
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(Actions, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(Group)
+export default connect(mapStateToProps, mapDispatchToProps)(Group)
