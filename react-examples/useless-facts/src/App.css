@@ -1,0 +1,60 @@
+.html {
+  font-size: 62.5%;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: relative;
+}
+
+.fact-box {
+  width: 90%;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.fact-title {
+  font-size: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #656565;
+}
+
+.fact-content {
+  padding: 2rem 0rem;
+}
+
+.like-dislike-buttons {
+  border-top: 1px solid #656565;
+  border-bottom: 1px solid #656565;
+  padding: 0.5rem 0rem;
+  text-align: right;
+}
+
+.like-button, .dislike-button {
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.add-fact-button {
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+}
+
+.shade {
+  position: fixed;
+  display: absolute;
+  left: 0;
+  z-index: 100;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0, 0.8);
+}
+
+.addFactButton, .factPopup {
+  z-index: 150;
+}

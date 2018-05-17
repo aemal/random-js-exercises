@@ -10,8 +10,8 @@ const Avatar = ({ width, src, alt, cssClassName }) => {
     };
 
     const imageSrc = imageExist(src) === true
-    ? src
-    : emptyAvatar;
+        ? src
+        : emptyAvatar;
 
     return (
         <img
