@@ -53,8 +53,14 @@ export const filterReducer = (state = intialState, action) => {
         return ({
           searchKeyWords: '',
           searchStarsCount: 0,
-          sortBy: 'ASCENDING',
-          groupBy: '',
+          sortBy: {
+            value: '',
+            text: 'Sort By'
+          },
+          groupBy: {
+            value: '',
+            text: 'Group By'
+          },
           Grouping: false
         });
       }
