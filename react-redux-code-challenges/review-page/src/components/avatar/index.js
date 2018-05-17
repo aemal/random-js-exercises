@@ -15,11 +15,11 @@ const Avatar = ({ width, src, alt, cssClassName }) => {
 
     return (
         <img
-        className={`avatar-image ${cssClassName}`}
-        style={style}
-        src={imageSrc}
-        alt={alt}
-    />
+            className={`avatar-image ${cssClassName}`}
+            style={style}
+            src={imageSrc}
+            alt={alt}
+        />
     );
 };
 

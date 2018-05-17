@@ -14,6 +14,16 @@ import * as ReviewActions from '../redux/actions/reviewsActions'
 import * as FilterActions from '../redux/actions/filtersActions'
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    
+    conosle.log("AAA");
+  }
+
+  componentWillMount() {
+
+  }
+
   componentDidMount(){
     this.props.fetchReviews(1)
   }
@@ -51,7 +61,7 @@ class App extends Component {
       : LoadingJSX;
 
 
-    const ValidatedReviewsJSX = error === ''
+      const ValidatedReviewsJSX = error === ''
       ? ReviewsJSX
       : <h3>{generalErrorMessage}</h3>
 

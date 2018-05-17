@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import StarRatingComponent from 'react-star-rating-component';
 import Moment from 'react-moment';
 import Avatar from '../avatar';
+
 import { SettingsContext } from '../../context/settings';
 
 export const Review = ({ review, index }) => {
