@@ -15,7 +15,6 @@ const Avatar = ({ width, src, alt, cssClassName }) => {
 
     return (
         <img
-            className={`avatar-image ${cssClassName}`}
             style={style}
             src={imageSrc}
             alt={alt}
@@ -27,7 +26,7 @@ Avatar.propTypes = {
     src: PropTypes.string.isRequired,
     alt: PropTypes.string.isRequired,
     width: PropTypes.string.isRequired,
-    cssClassName: PropTypes.string.isRequired,
+    cssClassName: PropTypes.string
 };
 
 export default Avatar;

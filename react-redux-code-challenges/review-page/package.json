@@ -4,8 +4,8 @@
   "private": true,
   "homepage": "https://github.com/aemal/randomJSExercises/blob/master/react-redux-code-challenges/review-page/README.md",
   "bugs": {
-     "url" : "https://github.com/aemal/randomJSExercises/issues",
-     "email" : "a@reactgeeks.com"
+    "url": "https://github.com/aemal/randomJSExercises/issues",
+    "email": "a@reactgeeks.com"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -21,7 +21,8 @@
     "react-star-rating-component": "^1.4.1",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "semantic-ui-react": "^0.80.0"
   },
   "scripts": {
     "start": "react-scripts start",

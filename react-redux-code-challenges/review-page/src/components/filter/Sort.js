@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import Dropdown from '../form-elements/Dropdown';
+import DropdownElement from '../form-elements/Dropdown';
 
 // Redux
 import { connect } from 'react-redux'
@@ -8,30 +8,41 @@ import { bindActionCreators } from 'redux'
 import * as Actions from '../../redux/actions/filtersActions'
 
 
-const Sort = ({ setSortBy }) => {
-  let onChange = (e) => {
-    let sortBy = e.target.value
+const Sort = ({ setSortBy, DefaultText }) => {
+  let onChange = (e, {value}) => {
+    let text = e.target.innerText
+    let sortBy = {
+      value,
+      text
+    }
     setSortBy(sortBy)
   }
     const options = [
-        { value: 'DESCENDING', label: 'Sort By Descending' }
+        {value: 'DESCENDING', text: 'Sorted By Descending' },
+        {value: 'ASCENDING', text: 'Sorted By Ascending' }
     ];
-    const defaultOption = { value: 'ASCENDING', label: 'Sort By Ascending' }
     return (
-        <Dropdown
+        <DropdownElement
             options={options}
             onOptionChanged={onChange}
-            defaultOption={defaultOption}
+            icon='sort'
+            text={DefaultText}
         />
     );
 };
 
 Sort.propTypes = {
-  setSortBy: PropTypes.func.isRequired
+  setSortBy: PropTypes.func.isRequired,
+  DefaultText: PropTypes.string.isRequired
+}
+const mapStateToProps = (state) => {
+   return  {
+     DefaultText: state.filters.sortBy.text,
+   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(Actions, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(Sort)
+export default connect(mapStateToProps, mapDispatchToProps)(Sort)

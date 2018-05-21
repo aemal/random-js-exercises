@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Form } from 'semantic-ui-react'
 import Search from './Search';
 import Group from './Group';
 import Sort from './Sort';
@@ -8,13 +9,19 @@ class Filter extends Component {
 
     render() {
         return (
-            <div>
+            <Form>
+              <Form.Field>
                 <Search />
+              </Form.Field>
+              <Form.Field>
                 <Group />
                 <Sort />
-                <div>FILTER BY:</div>
+              </Form.Field>
+              <Form.Field>
+                <label>FILTER BY:</label>
                 <Stars />
-            </div>
+              </Form.Field>
+            </Form>
         );
     }
 }

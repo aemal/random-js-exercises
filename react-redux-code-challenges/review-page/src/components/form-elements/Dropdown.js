@@ -1,34 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import { Dropdown } from 'semantic-ui-react'
 
-const Dropdown = ({ options, onOptionChanged, defaultOption }) => {
-    const optionsJSX = _.map(options, (option, index) => {
-        return <option
-                    key={index}
-                    value={option.value}>
-                    {option.label}
-                </option>
-    });
-    const {value, label} = defaultOption
+const DropdownElement = ({ options, onOptionChanged, text, icon}) => {
     return (
-        <select
-          onChange={(e) => onOptionChanged(e)}>
-          <option default value={value}>{label}</option>
-            {optionsJSX}
-        </select>
+      <Dropdown
+        icon={icon}
+        text={text}
+        floating
+        labeled
+        button
+        className='icon'
+        options={options}
+        onChange={(e, value) => onOptionChanged(e, value)} />
     );
 };
 
-Dropdown.propTypes = {
+DropdownElement.propTypes = {
     options: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired
+      text: PropTypes.string.isRequired
     }).isRequired).isRequired,
-    defaultOption: PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired
-    }).isRequired,
-    onOptionChanged: PropTypes.func.isRequired
+    icon: PropTypes.string.isRequired,
+    onOptionChanged: PropTypes.func.isRequired,
+    text: PropTypes.string.isRequired
 };
-export default Dropdown;
+export default DropdownElement;

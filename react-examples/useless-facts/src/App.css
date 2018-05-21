@@ -36,6 +36,8 @@
 .like-button, .dislike-button {
   cursor: pointer;
   margin-right: 0.5rem;
+  z-index: -200;
+  position: relative;
 }
 
 .add-fact-button {
@@ -48,7 +50,7 @@
   position: fixed;
   display: absolute;
   left: 0;
-  z-index: 100;
+  z-index: -100;
   right: 0;
   height: 100%;
   width: 100%;
@@ -57,4 +59,17 @@
 
 .addFactButton, .factPopup {
   z-index: 150;
+}
+
+.add-fact-form-title {
+  font-size: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.fact-form-title {
+  padding-bottom: 1rem;
+}
+
+.fact-form-content {
+  margin-bottom: 1rem;
 }

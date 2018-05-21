@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
-import Input from '../form-elements/Input';
+import InputElement from '../form-elements/Input';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from '../../redux/actions/filtersActions'
@@ -15,14 +15,12 @@ class Search extends Component {
   render() {
     const { searchKeyWords } = this.props
     return (
-        <div>
-            <Input
+            <InputElement
                 cssClassName="searchBar"
                 placeholder="Search"
                 value={searchKeyWords}
                 handleChange={this.handleChange.bind(this)}
             />
-        </div>
     );
   }
 };

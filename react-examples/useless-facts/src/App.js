@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { Button, Icon, Popup, Input } from 'semantic-ui-react'
+import { 
+  Button, 
+  Icon, 
+  Popup, 
+  Input,
+  TextArea,
+  Form
+ } from 'semantic-ui-react'
 import './App.css';
 import Fact from './Fact';
 
@@ -33,9 +40,23 @@ class App extends Component {
   renderAddFactForm() {
     return (
       <div>
-        <div className="add-fact-form-title">Add new fact</div>
-        <Input placeholder='Fact title...' />
-      </div>
+        <div className='add-fact-form-title'>Add new fact</div>
+          <Form>
+            <Input 
+              placeholder='Fact title...' 
+              className='fact-form-title'
+            />
+            <TextArea 
+              placeholder='Fact content...' 
+              className='fact-form-content'
+              style={{ marginBottom: '1rem' }}
+            />
+            <Button 
+              primary>
+              Add Fact
+            </Button>
+          </Form>
+        </div>
     );
   }
 

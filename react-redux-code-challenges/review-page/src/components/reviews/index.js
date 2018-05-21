@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import InfiniteScroll from "react-infinite-scroll-component";
 import _ from 'lodash';
@@ -42,7 +42,7 @@ export const Reviews = ({ reviews,
         return a.reviewCreated - b.reviewCreated;
       })
 
-  
+
   const mappedReview = () => {
     if(SortedArray.length === 0) {
       return (<h1>{`No review matches your search`}</h1>);
@@ -58,7 +58,7 @@ export const Reviews = ({ reviews,
       last = moment(date).format(groupBy);
       return GroupedByMonthJSX
     }
-  
+
     const GroupedByWeek = (date) => {
       let weekNo = moment(date).isoWeek();
       let weekStartDate = moment().day(weekFirstDay).week(weekNo).format(groupBy);
@@ -67,13 +67,13 @@ export const Reviews = ({ reviews,
       last = weekEndDate;
       return GroupedByWeekJSX
     }
-  
+
     const GroupedByDay = (date) => {
       let GroupedByDayJSX = last !== moment(date).format(groupBy) && <div>{moment(date).format(groupBy)}</div>
       last = moment(date).format(groupBy);
       return GroupedByDayJSX
     }
-  
+
     const GroupedByJSX = (review) => {
       let res = Grouping && groupBy === 'MMMM-YYYY'
                       ? GroupedByMonth(review.reviewCreated)
@@ -97,11 +97,11 @@ export const Reviews = ({ reviews,
           {_.map(SortedArray, ((r, index) => {
 
             return (
-                <div key={r.reviewId}>
+                <Fragment key={r.reviewId}>
                 <div>{GroupedByJSX(r)}</div>
                   <Review
                       review={r} />
-                </div>
+                </Fragment>
               );
           })
         )}

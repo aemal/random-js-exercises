@@ -3,8 +3,14 @@ import * as filterConsts from '../constants/filterConsts'
 const intialState = {
   searchKeyWords: '',
   searchStarsCount: 0,
-  sortBy: 'ASCENDING',
-  groupBy: '',
+  sortBy:  {
+    value: '',
+    text: 'Sort By'
+  },
+  groupBy: {
+    value: '',
+    text: 'Group by'
+  },
   Grouping: false
 }
 
@@ -47,8 +53,14 @@ export const filterReducer = (state = intialState, action) => {
         return ({
           searchKeyWords: '',
           searchStarsCount: 0,
-          sortBy: 'ASCENDING',
-          groupBy: '',
+          sortBy: {
+            value: '',
+            text: 'Sort By'
+          },
+          groupBy: {
+            value: '',
+            text: 'Group By'
+          },
           Grouping: false
         });
       }
