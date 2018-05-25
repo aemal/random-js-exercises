@@ -1,11 +1,8 @@
-import "pdfjs-dist/web/pdf_viewer"
 
 import React, { Component, Fragment } from 'react'
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import Thumbnails from '../Components/Thumbnails'
-import { PDFJS } from "pdfjs-dist";
 
-import "pdfjs-dist/web/pdf_viewer.css";
 
 export default class App extends Component {
   constructor(){

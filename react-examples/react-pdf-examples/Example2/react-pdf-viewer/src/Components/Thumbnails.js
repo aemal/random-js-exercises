@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Page } from 'react-pdf-pages';
 import PdfAnnotator from 'react-pdf-annotator'
 const Thumbnails = (props) => {
   let App =   props.pages.map((page, index) => {

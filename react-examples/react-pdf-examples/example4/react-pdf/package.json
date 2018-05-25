@@ -1,16 +1,12 @@
 {
-  "name": "react-pdf-viewer",
+  "name": "react-pdf",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "prop-types": "^15.6.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-pdf-annotator": "0.0.6",
     "react-scripts": "1.1.4"
-  },
-  "peerDependencies": {
-    "pdfjs-dist": "^1.6.380"
   },
   "scripts": {
     "start": "react-scripts start",
