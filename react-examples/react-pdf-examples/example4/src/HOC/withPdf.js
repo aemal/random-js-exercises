@@ -7,14 +7,11 @@ const withPdf = (WrappedComponent, Url, beforeLoad) => {
   return class extends Component {
     render() {
       return (
-
-        <div className='hoc-container'>
           <PdfLoader url={Url} beforeLoad={beforeLoad}>
             {pdfDocument => (
             <WrappedComponent {...this.props} pdfDocument={pdfDocument} />
             )}
           </PdfLoader>
-        </div>
       );
     }
   }

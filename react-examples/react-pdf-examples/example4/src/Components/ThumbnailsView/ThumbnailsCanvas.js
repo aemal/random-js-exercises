@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 
-export const PdfCanvas = ({ pages, children, handleClicked }) => {
-  let MappedPage = pages.map(page => {
+export const ThumbnailsCanvas = ({ pages, children, handleClicked, scale }) => {
+  let Thumbnail = pages.map(page => {
     //This gives us the page's dimensions at full scale
-    let viewport = page.getViewport(0.2);
+    let viewport = page.getViewport(scale);
 
     //We'll create a canvas for each page to draw it on
     let canvas = document.createElement( "canvas" );
@@ -20,14 +20,14 @@ export const PdfCanvas = ({ pages, children, handleClicked }) => {
 
     return null
   })
-  console.log("rendering canvas")
   return (
-    children(MappedPage)
+    children(Thumbnail)
   );
 }
 
-PdfCanvas.propTypes = {
+ThumbnailsCanvas.propTypes = {
   pages: PropTypes.array.isRequired,
   children: PropTypes.func.isRequired,
-  handleClicked: PropTypes.func.isRequired
+  handleClicked: PropTypes.func.isRequired,
+  scale: PropTypes.number.isRequired
 }
