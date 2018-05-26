@@ -1,12 +1,13 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import {ThumbnailsView } from '../Components/ThumbnailsView/ThumbnailsView'
- import { MainView } from '../Components/MainView/MainView'
+import { MainView } from '../Components/MainView/MainView'
+import './App.css'
 
 export default class App extends Component {
   constructor(){
     super()
     this.state = {
-      currentPage: null
+      currentPage: 1
     }
   }
 
@@ -21,19 +22,21 @@ export default class App extends Component {
     const { pdfDocument, Spinner } = this.props
     let MainViewJSX = currentPage
             ? <MainView
-                currentPage={currentPage}
-                pdfDocument={pdfDocument}/>
+                className='MainView'
+                pdfDocument={pdfDocument}
+                currentPage={currentPage}/>
             : null
     let ThumbnailsViewJSX = pdfDocument
           ? <ThumbnailsView
+              className='ThumbnailsView'
               pdfDocument={pdfDocument}
               pageClicked={this.pageClicked} />
           : Spinner
     return (
-      <Fragment>
-        {MainViewJSX}
+      <div className='container'>
         {ThumbnailsViewJSX}
-      </Fragment>
+        {MainViewJSX}
+      </div>
     );
   }
 }
