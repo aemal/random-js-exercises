@@ -5,9 +5,9 @@ import samplePdf from './assets/sample.pdf'
 import withPdf from './HOC/withPdf'
 
 
-const Spinner = <div>Wait!!!!</div>
+const Spinner = <h1>Loading...</h1>
 const AppWithPdf = withPdf(App, samplePdf, Spinner)
 
-const mount = <AppWithPdf />
+const mount = <AppWithPdf spinner={Spinner} />
 const node = document.getElementById('root')
 render(mount, node)

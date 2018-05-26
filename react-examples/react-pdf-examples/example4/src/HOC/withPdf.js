@@ -9,7 +9,9 @@ const withPdf = (WrappedComponent, Url, beforeLoad) => {
       return (
           <PdfLoader url={Url} beforeLoad={beforeLoad}>
             {pdfDocument => (
-            <WrappedComponent {...this.props} pdfDocument={pdfDocument} />
+            <WrappedComponent
+              {...this.props}
+              pdfDocument={pdfDocument} />
             )}
           </PdfLoader>
       );

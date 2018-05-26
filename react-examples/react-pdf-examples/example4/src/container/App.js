@@ -1,65 +1,38 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import {ThumbnailsView } from '../Components/ThumbnailsView/ThumbnailsView'
  import { MainView } from '../Components/MainView/MainView'
 
-export default class App extends PureComponent {
+export default class App extends Component {
   constructor(){
     super()
     this.state = {
-      pdfDoc: null,
-      pages: [],
-      totalPages: null,
       currentPage: null
     }
   }
 
 
-   componentDidMount() {
-     const pdfDoc = this.props.pdfDocument
-     let totalPages = pdfDoc.numPages
-
-     if (pdfDoc) {
-       for (let i = 1; i < totalPages + 1; i++){
-         pdfDoc.getPage(i)
-          .then(page => {
-            return this.setState({
-              pdfDoc,
-              totalPages,
-              pages: [...this.state.pages, page]
-            })
-          })
-       }
-     }
-  }
-
   pageClicked = (pageIndex) => {
-    let pages = this.state.pages
-    let currentPage = pages.find((page) => {
-      return page.pageIndex === pageIndex
-    })
     this.setState({
-      currentPage
+      currentPage: pageIndex
     })
   }
   render() {
-    const { pages, totalPages, currentPage } = this.state
-    console.log(this.state)
+    const { currentPage } = this.state
+    const { pdfDocument, Spinner } = this.props
+    let MainViewJSX = currentPage
+            ? <MainView
+                currentPage={currentPage}
+                pdfDocument={pdfDocument}/>
+            : null
+    let ThumbnailsViewJSX = pdfDocument
+          ? <ThumbnailsView
+              pdfDocument={pdfDocument}
+              pageClicked={this.pageClicked} />
+          : Spinner
     return (
       <Fragment>
-        {
-          currentPage
-          ? <MainView currentPage={currentPage}/>
-        : null
-        }
-        {
-          totalPages === pages.length
-          ? <ThumbnailsView
-                pages={pages}
-                pageClicked={this.pageClicked} />
-              :<div>wait...</div>
-
-        }
-
+        {MainViewJSX}
+        {ThumbnailsViewJSX}
       </Fragment>
     );
   }
