@@ -1,6 +1,6 @@
 import React, { PureComponent, Fragment } from 'react'
 import {ThumbnailsView } from '../Components/ThumbnailsView/ThumbnailsView'
-// import { MainView } from '../Components/MainView/MainView'
+ import { MainView } from '../Components/MainView/MainView'
 
 export default class App extends PureComponent {
   constructor(){
@@ -42,10 +42,15 @@ export default class App extends PureComponent {
     })
   }
   render() {
-    const { pages, totalPages } = this.state
+    const { pages, totalPages, currentPage } = this.state
     console.log(this.state)
     return (
       <Fragment>
+        {
+          currentPage
+          ? <MainView currentPage={currentPage}/>
+        : null
+        }
         {
           totalPages === pages.length
           ? <ThumbnailsView
@@ -54,6 +59,7 @@ export default class App extends PureComponent {
               :<div>wait...</div>
 
         }
+
       </Fragment>
     );
   }
