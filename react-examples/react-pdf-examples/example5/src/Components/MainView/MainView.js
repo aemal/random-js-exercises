@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types'
 // import Fuck  from 'pdfjs-dist/build/pdf.min';
 
@@ -14,8 +14,8 @@ export  class MainView extends Component {
   componentDidMount(){
     let { currentPage } = this.props
     this.props.pdfDocument.getPage(currentPage).then(page => {
-
-        let viewport = page.getViewport(1.5);
+        let scale = this.props.scale
+        let viewport = page.getViewport(scale);
         //We'll create a canvas for each page to draw it on
         let canvas = this.mainCanvas.current
         let context = canvas.getContext('2d');
@@ -68,8 +68,8 @@ export  class MainView extends Component {
     this.clearChildNodes(mainCanvas)
 
     this.props.pdfDocument.getPage(currentPage).then(page => {
-
-        let viewport = page.getViewport(1.5);
+        let scale = this.props.scale
+        let viewport = page.getViewport(scale);
         //We'll create a canvas for each page to draw it on
         let canvas = this.mainCanvas.current
         let context = canvas.getContext('2d');
@@ -107,13 +107,14 @@ export  class MainView extends Component {
           });
     })
   }
-
   render() {
     return (
+      <Fragment>
       <div style={{position: 'absolute'}} >
         <canvas ref={this.mainCanvas}></canvas>
         <div className="textLayer" ref={this.textDiv}></div>
       </div>
+    </Fragment>
     );
   }
 }

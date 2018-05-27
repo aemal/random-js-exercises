@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import {ThumbnailsView } from '../Components/ThumbnailsView/ThumbnailsView'
 import { MainView } from '../Components/MainView/MainView'
 import './App.css'
@@ -7,7 +7,8 @@ export default class App extends Component {
   constructor(){
     super()
     this.state = {
-      currentPage: 2
+      currentPage: 1,
+      scale: 1
     }
   }
 
@@ -39,16 +40,40 @@ export default class App extends Component {
           alert(`Invalid page to go back ${prevPage}`)
         }
       }
-
   }
+
+  scaleChanged = operation => {
+    if(operation === 'in'){
+      let newScale = this.state.scale + 0.25
+      if(newScale <= 3){
+        this.setState({
+          scale: newScale
+        })
+      } else {
+        alert(`You cant zoom in more than 3 scale`)
+      }
+    } else if(operation === 'out'){
+        let newScale = this.state.scale - 0.25
+        if (newScale >= 0.25){
+          this.setState({
+            scale: newScale
+          })
+        } else {
+          alert(`You cant zoom out more than 0.25 scale`)
+        }
+      }
+  }
+
   render() {
-    const { currentPage } = this.state
+    const { currentPage, scale } = this.state
     const { pdfDocument, Spinner } = this.props
     let MainViewJSX = currentPage
             ? <MainView
                 className='MainView'
                 pdfDocument={pdfDocument}
-                currentPage={currentPage}/>
+                currentPage={currentPage}
+                scale={scale}
+                scaleChanged={this.scaleChanged}/>
               : <div>Select any page to view that page in a sensible way :)</div>
     let ThumbnailsViewJSX = pdfDocument
           ? <ThumbnailsView
@@ -59,9 +84,13 @@ export default class App extends Component {
     return (
       <div className='container'>
         {ThumbnailsViewJSX}
-        <button onClick={this.pageChanged.bind(this, 'prev')}>Prev Page</button>
+        <Fragment>
+        <button onClick={this.pageChanged.bind(null, 'prev')}>Prev Page</button>
+        <button onClick={this.pageChanged.bind(null, 'next')}>Next Page</button>
+        <button onClick={this.scaleChanged.bind(null, 'out')}>Zoom Out</button>
+        <button onClick={this.scaleChanged.bind(null, 'in')}>Zoom In</button>
+        </Fragment>
         {MainViewJSX}
-        <button onClick={this.pageChanged.bind(this, 'next')}>Next Page</button>
       </div>
     );
   }
