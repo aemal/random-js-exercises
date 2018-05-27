@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+}
+/* .container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+  'ThumbnailsView MainView';
+}
+.ThumbnailsView {
+  grid-area: ThumbnailsView;
+  display: inline;
+  position: relative;
+}
+.MainView {
+  grid-area: MainView;
+  position: absolute;
+} */
+ /* .container{
+  overflow: hidden;
+} */
+
+
+
+.textLayer > div {
+  z-index: 2;
+  opacity: 1;
+  position: relative;
+}
+
+
+
+html
+  body
+  .textLayer
+  > div:not(.PdfAnnotator__highlight-layer):not(.Highlight):not(.Highlight-emoji) {
+  opacity: 1.5;
+}
+
+.textLayer ::selection {
+  background: rgba(252, 232, 151, 1);
+}
