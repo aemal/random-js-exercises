@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types'
 // import Fuck  from 'pdfjs-dist/build/pdf.min';
 
-import {TextLayerBuilder} from 'pdfjs-dist/web/pdf_viewer.js'
+import {TextLayerBuilder, PDFViewerApplication} from 'pdfjs-dist/web/pdf_viewer.js'
 
 export  class MainView extends Component {
   constructor(){
@@ -52,6 +52,7 @@ export  class MainView extends Component {
             textLayer.render();
           });
     })
+
   }
 
   clearChildNodes(myNode){
@@ -66,7 +67,7 @@ export  class MainView extends Component {
     this.clearChildNodes(Div)
     let mainCanvas = this.mainCanvas.current
     this.clearChildNodes(mainCanvas)
-
+    console.log(this.props.pdfDocument)
     this.props.pdfDocument.getPage(currentPage).then(page => {
         let scale = this.props.scale
         let viewport = page.getViewport(scale);
