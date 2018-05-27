@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 // import Fuck  from 'pdfjs-dist/build/pdf.min';
 
@@ -18,7 +18,6 @@ export  class MainView extends Component {
         let viewport = page.getViewport(1.5);
         //We'll create a canvas for each page to draw it on
         let canvas = this.mainCanvas.current
-        console.log(this.mainCanvas)
         let context = canvas.getContext('2d');
         canvas.height = viewport.height;
         canvas.width = viewport.width;
@@ -73,7 +72,6 @@ export  class MainView extends Component {
         let viewport = page.getViewport(1.5);
         //We'll create a canvas for each page to draw it on
         let canvas = this.mainCanvas.current
-        console.log(this.mainCanvas)
         let context = canvas.getContext('2d');
         canvas.height = viewport.height;
         canvas.width = viewport.width;
