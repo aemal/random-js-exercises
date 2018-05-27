@@ -17,6 +17,7 @@ export default class App extends Component {
       currentPage: pageIndex
     })
   }
+
   render() {
     const { currentPage } = this.state
     const { pdfDocument, Spinner } = this.props
@@ -25,7 +26,7 @@ export default class App extends Component {
                 className='MainView'
                 pdfDocument={pdfDocument}
                 currentPage={currentPage}/>
-            : null
+              : <div>Select any page to view that page in a sensible way :)</div>
     let ThumbnailsViewJSX = pdfDocument
           ? <ThumbnailsView
               className='ThumbnailsView'
