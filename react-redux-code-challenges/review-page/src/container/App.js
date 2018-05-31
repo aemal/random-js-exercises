@@ -15,21 +15,9 @@ import * as ReviewActions from '../redux/actions/reviewsActions'
 import * as FilterActions from '../redux/actions/filtersActions'
 
 class App extends Component {
-<<<<<<< HEAD
-  constructor(props) {
-    super(props)
-    
-    conosle.log("AAA");
-  }
-
-  componentWillMount() {
-
-  }
-=======
   state = { }
 
     handleContextRef = contextRef => this.setState({ contextRef })
->>>>>>> cf7d9cdd959fd9f3e33988d77038c21ce29acefc
 
   componentDidMount(){
     this.props.fetchReviews(1)
@@ -66,12 +54,7 @@ class App extends Component {
           searchStarsCount={searchStarsCount} />
       : LoadingJSX;
 
-<<<<<<< HEAD
-
-      const ValidatedReviewsJSX = error === ''
-=======
     const ValidatedReviewsJSX = error === ''
->>>>>>> cf7d9cdd959fd9f3e33988d77038c21ce29acefc
       ? ReviewsJSX
       : <h3>{generalErrorMessage}</h3>
       return (
